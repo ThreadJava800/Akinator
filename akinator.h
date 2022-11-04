@@ -43,6 +43,8 @@ int readNodes(Node_t *node, FILE *akiFile);
 
 int parseFile(Akinator_t *akinator, const char *fileName);
 
+int addNewNode(Node_t *node);
+
 int akiAsk(Node_t *node);
 
 int akiPlay(Akinator_t *akinator);

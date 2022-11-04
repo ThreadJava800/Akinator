@@ -1,16 +1,6 @@
 digraph tree {
 	rankdir=HR;
-	label0x604000000010[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Животное | {left: 0x604000000350 | right: 0x604000000390} | previous: (nil) }}"];
-	label0x604000000350[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: 1.5 | {left: (nil) | right: (nil)} | previous: 0x604000000010 }}"];
-	label0x604000000010->label0x604000000350 [color="red", style="dashed",arrowhead="none"]	label0x604000000390[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: ведёт матан | {left: 0x6040000003d0 | right: 0x604000000410} | previous: 0x604000000010 }}"];
-	label0x604000000010->label0x604000000390 [color="red", style="dashed",arrowhead="none"]	label0x6040000003d0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: ведёт у ФПМИ | {left: 0x604000000450 | right: 0x604000000490} | previous: 0x604000000390 }}"];
-	label0x604000000390->label0x6040000003d0 [color="red", style="dashed",arrowhead="none"]	label0x604000000450[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Норм | {left: 0x6040000004d0 | right: 0x604000000510} | previous: 0x6040000003d0 }}"];
-	label0x6040000003d0->label0x604000000450 [color="red", style="dashed",arrowhead="none"]	label0x6040000004d0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Да | {left: (nil) | right: (nil)} | previous: 0x604000000450 }}"];
-	label0x604000000450->label0x6040000004d0 [color="red", style="dashed",arrowhead="none"]	label0x604000000510[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Нет | {left: (nil) | right: (nil)} | previous: 0x604000000450 }}"];
-	label0x604000000450->label0x604000000510 [color="red", style="dashed",arrowhead="none"]	label0x604000000490[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Дашков | {left: 0x604000000550 | right: 0x604000000590} | previous: 0x6040000003d0 }}"];
-	label0x6040000003d0->label0x604000000490 [color="red", style="dashed",arrowhead="none"]	label0x604000000550[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Угу | {left: (nil) | right: (nil)} | previous: 0x604000000490 }}"];
-	label0x604000000490->label0x604000000550 [color="red", style="dashed",arrowhead="none"]	label0x604000000590[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Вы не шокированы | {left: (nil) | right: (nil)} | previous: 0x604000000490 }}"];
-	label0x604000000490->label0x604000000590 [color="red", style="dashed",arrowhead="none"]	label0x604000000410[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: поёт | {left: 0x6040000005d0 | right: 0x604000000610} | previous: 0x604000000390 }}"];
-	label0x604000000390->label0x604000000410 [color="red", style="dashed",arrowhead="none"]	label0x6040000005d0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: А.П. | {left: (nil) | right: (nil)} | previous: 0x604000000410 }}"];
-	label0x604000000410->label0x6040000005d0 [color="red", style="dashed",arrowhead="none"]	label0x604000000610[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: DED | {left: (nil) | right: (nil)} | previous: 0x604000000410 }}"];
-	label0x604000000410->label0x604000000610 [color="red", style="dashed",arrowhead="none"]}
+	label0x6040000001d0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Курит | {left: 0x604000000390 | right: 0x604000000350} | previous: 0x604000000150 }}"];
+	label0x604000000150->label0x6040000001d0 [color="red", style="dashed",arrowhead="none"]	label0x604000000390[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Богданов | {left: (nil) | right: (nil)} | previous: 0x6040000001d0 }}"];
+	label0x6040000001d0->label0x604000000390 [color="red", style="dashed",arrowhead="none"]	label0x604000000350[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Р | {left: (nil) | right: (nil)} | previous: 0x6040000001d0 }}"];
+	label0x6040000001d0->label0x604000000350 [color="red", style="dashed",arrowhead="none"]}

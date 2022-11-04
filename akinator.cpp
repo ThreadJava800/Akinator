@@ -88,6 +88,34 @@ int parseFile(Akinator_t *akinator, const char *fileName) {
     return err;
 }
 
+int addNewNode(Node_t *node) {
+    CHECK(!node, node, NULL_PTR);
+
+    char leftName[MAX_FILE_NAME] = "";
+    akiPrint("Ладно, ты победил. Кто это был?\nСкажи пж: ");
+    scanf("%s", leftName);
+
+    Node_t *newRight = nodeCtor(node->value, nullptr, nullptr, node, printElemT);
+    Node_t *newLeft  = nodeCtor(leftName, nullptr, nullptr, node, printElemT);
+
+    akiPrint("Чем ");
+    akiPrint(leftName);
+    akiPrint(" отличается от ");
+    akiPrint(newRight->value);
+    akiPrint("?\n");
+
+    char nodeQuest[MAX_FILE_NAME] = "";
+    scanf("%s", nodeQuest);
+
+    node->value = nodeQuest;
+    node->right = newRight;
+    node->left  = newLeft;
+
+    akiPrint("Добавил :) Теперь я чуточку умнее.");
+
+    return AKINATOR_OK;
+}
+
 int akiAsk(Node_t *node) {
     CHECK(!node, node, NULL_PTR);
 
@@ -98,23 +126,29 @@ int akiAsk(Node_t *node) {
     akiPrint("? (да/нет)\n");
 
     int failure = 1;
+    int err = AKINATOR_OK;
     while (failure) {
         char answer[10] = "";
         scanf("%s", answer);
 
         failure = 0;
         if (strcasecmp(answer, "да") == 0) {
+
             if (node->left) akiAsk(node->left);
             else akiPrint("Ха-ха, я умнее тебя! У меня памяти 16 Мегабайт!\n");
+
         } else if (strcasecmp(answer, "нет") == 0) {
-            akiAsk(node->right);
+
+            if (node->right) akiAsk(node->right);
+            else err |= addNewNode(node);
+
         } else {
             akiPrint("Не понял, ещё раз:\n");
             failure = 1;
         }
     }
 
-    return AKINATOR_OK;
+    return err;
 }
 
 int akiPlay(Akinator_t *akinator) {
