@@ -88,7 +88,35 @@ int parseFile(Akinator_t *akinator, const char *fileName) {
     return err;
 }
 
-int addNewNode(Node_t *node) {
+void akiNodeToFile(Node_t *node, FILE *file) {
+    if (!node || !file) return;
+
+    fprintf(file, "\n{ \"%s\"", node->value);
+
+    int addedBracket = 1;
+    if (node->left)  akiNodeToFile(node->left, file);
+    if (!node->left) {
+        fprintf(file, " }\n");
+        addedBracket = 0;
+    }
+
+    if (node->right)  akiNodeToFile(node->right, file);
+    if (!node->right && addedBracket) fprintf(file, " }\n");
+}
+
+int akinatorToFile(Akinator_t *akinator, const char *fileName) {
+    CHECK_AKI(!akinator || !fileName, AKINATOR_NULL);
+
+    FILE *writeFile = fopen(fileName, "w");
+    CHECK_AKI(!writeFile, FILE_NULL);
+
+    akiNodeToFile(akinator->root, writeFile);
+    fclose(writeFile);
+
+    return AKINATOR_OK;
+}
+
+int addNewNode(Akinator_t *akinator, Node_t *node, const char *fileName) {
     CHECK(!node, node, NULL_PTR);
 
     char leftName[MAX_FILE_NAME] = "";
@@ -111,12 +139,14 @@ int addNewNode(Node_t *node) {
     node->right = newRight;
     node->left  = newLeft;
 
-    akiPrint("Добавил :) Теперь я чуточку умнее.");
+    int err = AKINATOR_OK;
+    err |= akinatorToFile(akinator, fileName);
+    if (err == AKINATOR_OK) akiPrint("Добавил :) Теперь я чуточку умнее.\n");
 
-    return AKINATOR_OK;
+    return err;
 }
 
-int akiAsk(Node_t *node) {
+int akiAsk(Akinator_t *akinator, Node_t *node, const char *fileName) {
     CHECK(!node, node, NULL_PTR);
 
     if (!(node->left && node->right)) {
@@ -134,13 +164,13 @@ int akiAsk(Node_t *node) {
         failure = 0;
         if (strcasecmp(answer, "да") == 0) {
 
-            if (node->left) akiAsk(node->left);
+            if (node->left) akiAsk(akinator, node->left, fileName);
             else akiPrint("Ха-ха, я умнее тебя! У меня памяти 16 Мегабайт!\n");
 
         } else if (strcasecmp(answer, "нет") == 0) {
 
-            if (node->right) akiAsk(node->right);
-            else err |= addNewNode(node);
+            if (node->right) akiAsk(akinator, node->right, fileName);
+            else err |= addNewNode(akinator, node, fileName);
 
         } else {
             akiPrint("Не понял, ещё раз:\n");
@@ -162,7 +192,7 @@ int akiPlay(Akinator_t *akinator) {
     err |= parseFile(akinator, fileName);
     if (err != AKINATOR_OK) return err;
 
-    err |= akiAsk(akinator->root);
+    err |= akiAsk(akinator, akinator->root, fileName);
     if (err == AKINATOR_OK) chooseMode(akinator);
 
     return err;
