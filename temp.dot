@@ -1,0 +1,10 @@
+digraph tree {
+	rankdir=HR;
+	label0x5631ed531480[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Животное | {left: 0x5631ed5326c0 | right: 0x5631ed5326f0} | previous: (nil) }}"];
+	label0x5631ed5326c0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: 1.5 | {left: (nil) | right: (nil)} | previous: 0x5631ed531480 }}"];
+	label0x5631ed531480->label0x5631ed5326c0 [color="red", style="dashed",arrowhead="none"]	label0x5631ed5326f0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: ведёт матан | {left: 0x5631ed532760 | right: 0x5631ed532790} | previous: 0x5631ed531480 }}"];
+	label0x5631ed531480->label0x5631ed5326f0 [color="red", style="dashed",arrowhead="none"]	label0x5631ed532760[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: ведёт у ФПМИ | {left: 0x5631ed5327e0 | right: 0x5631ed532810} | previous: 0x5631ed5326f0 }}"];
+	label0x5631ed5326f0->label0x5631ed532760 [color="red", style="dashed",arrowhead="none"]	label0x5631ed5327e0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: P | {left: (nil) | right: (nil)} | previous: 0x5631ed532760 }}"];
+	label0x5631ed532760->label0x5631ed5327e0 [color="red", style="dashed",arrowhead="none"]	label0x5631ed532810[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: ПАЮ | {left: (nil) | right: (nil)} | previous: 0x5631ed532760 }}"];
+	label0x5631ed532760->label0x5631ed532810 [color="red", style="dashed",arrowhead="none"]	label0x5631ed532790[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Это неизвестно кто | {left: (nil) | right: (nil)} | previous: 0x5631ed5326f0 }}"];
+	label0x5631ed5326f0->label0x5631ed532790 [color="red", style="dashed",arrowhead="none"]}
