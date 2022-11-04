@@ -15,7 +15,7 @@ int readNode(Node_t *node, FILE *akiFile) {
     CHECK_AKI(!akiFile, FILE_NULL);
 
     int symb = getc(akiFile);
-    while (symb != '{' && symb != '}' && symb != '\0') {
+    while (symb != '{' && symb != '}' && symb != EOF) {
         symb = getc(akiFile);
     }
 
@@ -37,7 +37,8 @@ int readNode(Node_t *node, FILE *akiFile) {
         }
 
         nodeText[nodeTextInd - 1] = '\0';
-        node->value = (char*) calloc(nodeTextInd, sizeof(char));
+        //printf("%s\n", nodeText);
+        node->value = (char*) calloc((size_t) nodeTextInd, sizeof(char));
         strcpy(node->value, nodeText);
     } 
 
@@ -47,6 +48,7 @@ int readNode(Node_t *node, FILE *akiFile) {
     
     if (symb == '}') {
         node->left = node->right = nullptr;
+        printf("%s\n", node->value);
         symb = getc(akiFile);
     } else {
         node->left  = nodeCtor("Это неизвестно кто", nullptr, nullptr, node, printElemT);
@@ -65,6 +67,7 @@ int readNodes(Node_t *node, FILE *akiFile) {
     err |= readNode(node, akiFile);
     if (node->left)  readNodes(node->left,  akiFile);
     if (node->right) readNodes(node->right, akiFile);
+    graphDump(node);
 
     return err;
 }
