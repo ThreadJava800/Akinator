@@ -15,49 +15,49 @@
 <path fill="red" stroke="black" d="M634,-332.5C634,-332.5 1033,-332.5 1033,-332.5 1039,-332.5 1045,-338.5 1045,-344.5 1045,-344.5 1045,-366.5 1045,-366.5 1045,-372.5 1039,-378.5 1033,-378.5 1033,-378.5 634,-378.5 634,-378.5 628,-378.5 622,-372.5 622,-366.5 622,-366.5 622,-344.5 622,-344.5 622,-338.5 628,-332.5 634,-332.5"/>
 <text text-anchor="middle" x="682.5" y="-351.8" font-family="Times,serif" font-size="14.00">val: Животное</text>
 <polyline fill="none" stroke="black" points="743,-332.5 743,-378.5 "/>
-<text text-anchor="middle" x="836" y="-363.3" font-family="Times,serif" font-size="14.00">left: 0x604000000750</text>
+<text text-anchor="middle" x="836" y="-363.3" font-family="Times,serif" font-size="14.00">left: 0x604000000050</text>
 <polyline fill="none" stroke="black" points="743,-355.5 929,-355.5 "/>
-<text text-anchor="middle" x="836" y="-340.3" font-family="Times,serif" font-size="14.00">right: 0x604000000790</text>
+<text text-anchor="middle" x="836" y="-340.3" font-family="Times,serif" font-size="14.00">right: 0x604000000090</text>
 <polyline fill="none" stroke="black" points="929,-332.5 929,-378.5 "/>
 <text text-anchor="middle" x="987" y="-351.8" font-family="Times,serif" font-size="14.00">previous: (nil)</text>
 </g>
-<!-- label0x604000000750 -->
+<!-- label0x604000000050 -->
 <g id="node2" class="node">
-<title>label0x604000000750</title>
+<title>label0x604000000050</title>
 <path fill="red" stroke="black" d="M343.5,-249.5C343.5,-249.5 799.5,-249.5 799.5,-249.5 805.5,-249.5 811.5,-255.5 811.5,-261.5 811.5,-261.5 811.5,-283.5 811.5,-283.5 811.5,-289.5 805.5,-295.5 799.5,-295.5 799.5,-295.5 343.5,-295.5 343.5,-295.5 337.5,-295.5 331.5,-289.5 331.5,-283.5 331.5,-283.5 331.5,-261.5 331.5,-261.5 331.5,-255.5 337.5,-249.5 343.5,-249.5"/>
 <text text-anchor="middle" x="372.5" y="-268.8" font-family="Times,serif" font-size="14.00">val: Учит</text>
 <polyline fill="none" stroke="black" points="413.5,-249.5 413.5,-295.5 "/>
-<text text-anchor="middle" x="506.5" y="-280.3" font-family="Times,serif" font-size="14.00">left: 0x6040000007d0</text>
+<text text-anchor="middle" x="506.5" y="-280.3" font-family="Times,serif" font-size="14.00">left: 0x6040000000d0</text>
 <polyline fill="none" stroke="black" points="413.5,-272.5 599.5,-272.5 "/>
-<text text-anchor="middle" x="506.5" y="-257.3" font-family="Times,serif" font-size="14.00">right: 0x604000000810</text>
+<text text-anchor="middle" x="506.5" y="-257.3" font-family="Times,serif" font-size="14.00">right: 0x604000000110</text>
 <polyline fill="none" stroke="black" points="599.5,-249.5 599.5,-295.5 "/>
 <text text-anchor="middle" x="705.5" y="-268.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000010</text>
 </g>
-<!-- label0x604000000010&#45;&gt;label0x604000000750 -->
+<!-- label0x604000000010&#45;&gt;label0x604000000050 -->
 <g id="edge1" class="edge">
-<title>label0x604000000010&#45;&gt;label0x604000000750</title>
+<title>label0x604000000010&#45;&gt;label0x604000000050</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M762.25,-332.47C725.13,-321 679.86,-307 642.73,-295.52"/>
 </g>
-<!-- label0x604000000790 -->
+<!-- label0x604000000090 -->
 <g id="node5" class="node">
-<title>label0x604000000790</title>
+<title>label0x604000000090</title>
 <path fill="red" stroke="black" d="M841.5,-249.5C841.5,-249.5 1351.5,-249.5 1351.5,-249.5 1357.5,-249.5 1363.5,-255.5 1363.5,-261.5 1363.5,-261.5 1363.5,-283.5 1363.5,-283.5 1363.5,-289.5 1357.5,-295.5 1351.5,-295.5 1351.5,-295.5 841.5,-295.5 841.5,-295.5 835.5,-295.5 829.5,-289.5 829.5,-283.5 829.5,-283.5 829.5,-261.5 829.5,-261.5 829.5,-255.5 835.5,-249.5 841.5,-249.5"/>
 <text text-anchor="middle" x="897.5" y="-268.8" font-family="Times,serif" font-size="14.00">val: ведёт матан</text>
 <polyline fill="none" stroke="black" points="965.5,-249.5 965.5,-295.5 "/>
-<text text-anchor="middle" x="1058.5" y="-280.3" font-family="Times,serif" font-size="14.00">left: 0x604000000850</text>
+<text text-anchor="middle" x="1058.5" y="-280.3" font-family="Times,serif" font-size="14.00">left: 0x604000000150</text>
 <polyline fill="none" stroke="black" points="965.5,-272.5 1151.5,-272.5 "/>
-<text text-anchor="middle" x="1058.5" y="-257.3" font-family="Times,serif" font-size="14.00">right: 0x604000000890</text>
+<text text-anchor="middle" x="1058.5" y="-257.3" font-family="Times,serif" font-size="14.00">right: 0x604000000190</text>
 <polyline fill="none" stroke="black" points="1151.5,-249.5 1151.5,-295.5 "/>
 <text text-anchor="middle" x="1257.5" y="-268.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000010</text>
 </g>
-<!-- label0x604000000010&#45;&gt;label0x604000000790 -->
+<!-- label0x604000000010&#45;&gt;label0x604000000090 -->
 <g id="edge4" class="edge">
-<title>label0x604000000010&#45;&gt;label0x604000000790</title>
+<title>label0x604000000010&#45;&gt;label0x604000000090</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M905.02,-332.47C942.29,-321 987.73,-307 1025,-295.52"/>
 </g>
-<!-- label0x6040000007d0 -->
+<!-- label0x6040000000d0 -->
 <g id="node3" class="node">
-<title>label0x6040000007d0</title>
+<title>label0x6040000000d0</title>
 <path fill="red" stroke="black" d="M12,-166.5C12,-166.5 369,-166.5 369,-166.5 375,-166.5 381,-172.5 381,-178.5 381,-178.5 381,-200.5 381,-200.5 381,-206.5 375,-212.5 369,-212.5 369,-212.5 12,-212.5 12,-212.5 6,-212.5 0,-206.5 0,-200.5 0,-200.5 0,-178.5 0,-178.5 0,-172.5 6,-166.5 12,-166.5"/>
 <text text-anchor="middle" x="40" y="-185.8" font-family="Times,serif" font-size="14.00">val: ДЕД</text>
 <polyline fill="none" stroke="black" points="80,-166.5 80,-212.5 "/>
@@ -65,16 +65,16 @@
 <polyline fill="none" stroke="black" points="80,-189.5 169,-189.5 "/>
 <text text-anchor="middle" x="124.5" y="-174.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
 <polyline fill="none" stroke="black" points="169,-166.5 169,-212.5 "/>
-<text text-anchor="middle" x="275" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000750</text>
+<text text-anchor="middle" x="275" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000050</text>
 </g>
-<!-- label0x604000000750&#45;&gt;label0x6040000007d0 -->
+<!-- label0x604000000050&#45;&gt;label0x6040000000d0 -->
 <g id="edge2" class="edge">
-<title>label0x604000000750&#45;&gt;label0x6040000007d0</title>
+<title>label0x604000000050&#45;&gt;label0x6040000000d0</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M467.89,-249.47C413.91,-238 348.07,-224 294.09,-212.52"/>
 </g>
-<!-- label0x604000000810 -->
+<!-- label0x604000000110 -->
 <g id="node4" class="node">
-<title>label0x604000000810</title>
+<title>label0x604000000110</title>
 <path fill="red" stroke="black" d="M410.5,-166.5C410.5,-166.5 756.5,-166.5 756.5,-166.5 762.5,-166.5 768.5,-172.5 768.5,-178.5 768.5,-178.5 768.5,-200.5 768.5,-200.5 768.5,-206.5 762.5,-212.5 756.5,-212.5 756.5,-212.5 410.5,-212.5 410.5,-212.5 404.5,-212.5 398.5,-206.5 398.5,-200.5 398.5,-200.5 398.5,-178.5 398.5,-178.5 398.5,-172.5 404.5,-166.5 410.5,-166.5"/>
 <text text-anchor="middle" x="433" y="-185.8" font-family="Times,serif" font-size="14.00">val: 1.5</text>
 <polyline fill="none" stroke="black" points="467.5,-166.5 467.5,-212.5 "/>
@@ -82,152 +82,152 @@
 <polyline fill="none" stroke="black" points="467.5,-189.5 556.5,-189.5 "/>
 <text text-anchor="middle" x="512" y="-174.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
 <polyline fill="none" stroke="black" points="556.5,-166.5 556.5,-212.5 "/>
-<text text-anchor="middle" x="662.5" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000750</text>
+<text text-anchor="middle" x="662.5" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000050</text>
 </g>
-<!-- label0x604000000750&#45;&gt;label0x604000000810 -->
+<!-- label0x604000000050&#45;&gt;label0x604000000110 -->
 <g id="edge3" class="edge">
-<title>label0x604000000750&#45;&gt;label0x604000000810</title>
+<title>label0x604000000050&#45;&gt;label0x604000000110</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M574.78,-249.37C576.47,-237.94 578.53,-224.03 580.22,-212.61"/>
 </g>
-<!-- label0x604000000850 -->
+<!-- label0x604000000150 -->
 <g id="node6" class="node">
-<title>label0x604000000850</title>
+<title>label0x604000000150</title>
 <path fill="red" stroke="black" d="M821.5,-166.5C821.5,-166.5 1349.5,-166.5 1349.5,-166.5 1355.5,-166.5 1361.5,-172.5 1361.5,-178.5 1361.5,-178.5 1361.5,-200.5 1361.5,-200.5 1361.5,-206.5 1355.5,-212.5 1349.5,-212.5 1349.5,-212.5 821.5,-212.5 821.5,-212.5 815.5,-212.5 809.5,-206.5 809.5,-200.5 809.5,-200.5 809.5,-178.5 809.5,-178.5 809.5,-172.5 815.5,-166.5 821.5,-166.5"/>
 <text text-anchor="middle" x="886.5" y="-185.8" font-family="Times,serif" font-size="14.00">val: ведёт у ФПМИ</text>
 <polyline fill="none" stroke="black" points="963.5,-166.5 963.5,-212.5 "/>
-<text text-anchor="middle" x="1056.5" y="-197.3" font-family="Times,serif" font-size="14.00">left: 0x6040000008d0</text>
+<text text-anchor="middle" x="1056.5" y="-197.3" font-family="Times,serif" font-size="14.00">left: 0x6040000001d0</text>
 <polyline fill="none" stroke="black" points="963.5,-189.5 1149.5,-189.5 "/>
-<text text-anchor="middle" x="1056.5" y="-174.3" font-family="Times,serif" font-size="14.00">right: 0x604000000910</text>
+<text text-anchor="middle" x="1056.5" y="-174.3" font-family="Times,serif" font-size="14.00">right: 0x604000000210</text>
 <polyline fill="none" stroke="black" points="1149.5,-166.5 1149.5,-212.5 "/>
-<text text-anchor="middle" x="1255.5" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000790</text>
+<text text-anchor="middle" x="1255.5" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000090</text>
 </g>
-<!-- label0x604000000790&#45;&gt;label0x604000000850 -->
+<!-- label0x604000000090&#45;&gt;label0x604000000150 -->
 <g id="edge5" class="edge">
-<title>label0x604000000790&#45;&gt;label0x604000000850</title>
+<title>label0x604000000090&#45;&gt;label0x604000000150</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M1093.49,-249.37C1091.94,-237.94 1090.05,-224.03 1088.5,-212.61"/>
 </g>
-<!-- label0x604000000890 -->
+<!-- label0x604000000190 -->
 <g id="node13" class="node">
-<title>label0x604000000890</title>
-<path fill="red" stroke="black" d="M1392,-166.5C1392,-166.5 1845,-166.5 1845,-166.5 1851,-166.5 1857,-172.5 1857,-178.5 1857,-178.5 1857,-200.5 1857,-200.5 1857,-206.5 1851,-212.5 1845,-212.5 1845,-212.5 1392,-212.5 1392,-212.5 1386,-212.5 1380,-206.5 1380,-200.5 1380,-200.5 1380,-178.5 1380,-178.5 1380,-172.5 1386,-166.5 1392,-166.5"/>
-<text text-anchor="middle" x="1420" y="-185.8" font-family="Times,serif" font-size="14.00">val: поёт</text>
-<polyline fill="none" stroke="black" points="1460,-166.5 1460,-212.5 "/>
-<text text-anchor="middle" x="1552.5" y="-197.3" font-family="Times,serif" font-size="14.00">left: 0x604000000a50</text>
-<polyline fill="none" stroke="black" points="1460,-189.5 1645,-189.5 "/>
-<text text-anchor="middle" x="1552.5" y="-174.3" font-family="Times,serif" font-size="14.00">right: 0x604000000a90</text>
-<polyline fill="none" stroke="black" points="1645,-166.5 1645,-212.5 "/>
-<text text-anchor="middle" x="1751" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000790</text>
+<title>label0x604000000190</title>
+<path fill="red" stroke="black" d="M1391.5,-166.5C1391.5,-166.5 1845.5,-166.5 1845.5,-166.5 1851.5,-166.5 1857.5,-172.5 1857.5,-178.5 1857.5,-178.5 1857.5,-200.5 1857.5,-200.5 1857.5,-206.5 1851.5,-212.5 1845.5,-212.5 1845.5,-212.5 1391.5,-212.5 1391.5,-212.5 1385.5,-212.5 1379.5,-206.5 1379.5,-200.5 1379.5,-200.5 1379.5,-178.5 1379.5,-178.5 1379.5,-172.5 1385.5,-166.5 1391.5,-166.5"/>
+<text text-anchor="middle" x="1419.5" y="-185.8" font-family="Times,serif" font-size="14.00">val: поёт</text>
+<polyline fill="none" stroke="black" points="1459.5,-166.5 1459.5,-212.5 "/>
+<text text-anchor="middle" x="1552.5" y="-197.3" font-family="Times,serif" font-size="14.00">left: 0x604000000350</text>
+<polyline fill="none" stroke="black" points="1459.5,-189.5 1645.5,-189.5 "/>
+<text text-anchor="middle" x="1552.5" y="-174.3" font-family="Times,serif" font-size="14.00">right: 0x604000000390</text>
+<polyline fill="none" stroke="black" points="1645.5,-166.5 1645.5,-212.5 "/>
+<text text-anchor="middle" x="1751.5" y="-185.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000090</text>
 </g>
-<!-- label0x604000000790&#45;&gt;label0x604000000890 -->
+<!-- label0x604000000090&#45;&gt;label0x604000000190 -->
 <g id="edge12" class="edge">
-<title>label0x604000000790&#45;&gt;label0x604000000890</title>
+<title>label0x604000000090&#45;&gt;label0x604000000190</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M1238.45,-249.47C1312.42,-238 1402.62,-224 1476.58,-212.52"/>
 </g>
-<!-- label0x6040000008d0 -->
+<!-- label0x6040000001d0 -->
 <g id="node7" class="node">
-<title>label0x6040000008d0</title>
-<path fill="red" stroke="black" d="M363,-83.5C363,-83.5 824,-83.5 824,-83.5 830,-83.5 836,-89.5 836,-95.5 836,-95.5 836,-117.5 836,-117.5 836,-123.5 830,-129.5 824,-129.5 824,-129.5 363,-129.5 363,-129.5 357,-129.5 351,-123.5 351,-117.5 351,-117.5 351,-95.5 351,-95.5 351,-89.5 357,-83.5 363,-83.5"/>
-<text text-anchor="middle" x="394.5" y="-102.8" font-family="Times,serif" font-size="14.00">val: Норм</text>
-<polyline fill="none" stroke="black" points="438,-83.5 438,-129.5 "/>
-<text text-anchor="middle" x="531" y="-114.3" font-family="Times,serif" font-size="14.00">left: 0x604000000950</text>
-<polyline fill="none" stroke="black" points="438,-106.5 624,-106.5 "/>
-<text text-anchor="middle" x="531" y="-91.3" font-family="Times,serif" font-size="14.00">right: 0x604000000990</text>
-<polyline fill="none" stroke="black" points="624,-83.5 624,-129.5 "/>
-<text text-anchor="middle" x="730" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000850</text>
+<title>label0x6040000001d0</title>
+<path fill="red" stroke="black" d="M361,-83.5C361,-83.5 822,-83.5 822,-83.5 828,-83.5 834,-89.5 834,-95.5 834,-95.5 834,-117.5 834,-117.5 834,-123.5 828,-129.5 822,-129.5 822,-129.5 361,-129.5 361,-129.5 355,-129.5 349,-123.5 349,-117.5 349,-117.5 349,-95.5 349,-95.5 349,-89.5 355,-83.5 361,-83.5"/>
+<text text-anchor="middle" x="392.5" y="-102.8" font-family="Times,serif" font-size="14.00">val: Норм</text>
+<polyline fill="none" stroke="black" points="436,-83.5 436,-129.5 "/>
+<text text-anchor="middle" x="529" y="-114.3" font-family="Times,serif" font-size="14.00">left: 0x604000000250</text>
+<polyline fill="none" stroke="black" points="436,-106.5 622,-106.5 "/>
+<text text-anchor="middle" x="529" y="-91.3" font-family="Times,serif" font-size="14.00">right: 0x604000000290</text>
+<polyline fill="none" stroke="black" points="622,-83.5 622,-129.5 "/>
+<text text-anchor="middle" x="728" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000150</text>
 </g>
-<!-- label0x604000000850&#45;&gt;label0x6040000008d0 -->
+<!-- label0x604000000150&#45;&gt;label0x6040000001d0 -->
 <g id="edge6" class="edge">
-<title>label0x604000000850&#45;&gt;label0x6040000008d0</title>
-<path fill="none" stroke="red" stroke-dasharray="5,2" d="M951.71,-166.47C881.99,-155 796.98,-141 727.26,-129.52"/>
+<title>label0x604000000150&#45;&gt;label0x6040000001d0</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M951.16,-166.47C881.17,-155 795.8,-141 725.81,-129.52"/>
 </g>
-<!-- label0x604000000910 -->
+<!-- label0x604000000210 -->
 <g id="node10" class="node">
-<title>label0x604000000910</title>
-<path fill="red" stroke="black" d="M866,-83.5C866,-83.5 1343,-83.5 1343,-83.5 1349,-83.5 1355,-89.5 1355,-95.5 1355,-95.5 1355,-117.5 1355,-117.5 1355,-123.5 1349,-129.5 1343,-129.5 1343,-129.5 866,-129.5 866,-129.5 860,-129.5 854,-123.5 854,-117.5 854,-117.5 854,-95.5 854,-95.5 854,-89.5 860,-83.5 866,-83.5"/>
-<text text-anchor="middle" x="906" y="-102.8" font-family="Times,serif" font-size="14.00">val: Дашков</text>
-<polyline fill="none" stroke="black" points="958,-83.5 958,-129.5 "/>
-<text text-anchor="middle" x="1050.5" y="-114.3" font-family="Times,serif" font-size="14.00">left: 0x6040000009d0</text>
-<polyline fill="none" stroke="black" points="958,-106.5 1143,-106.5 "/>
-<text text-anchor="middle" x="1050.5" y="-91.3" font-family="Times,serif" font-size="14.00">right: 0x604000000a10</text>
-<polyline fill="none" stroke="black" points="1143,-83.5 1143,-129.5 "/>
-<text text-anchor="middle" x="1249" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000850</text>
+<title>label0x604000000210</title>
+<path fill="red" stroke="black" d="M864.5,-83.5C864.5,-83.5 1342.5,-83.5 1342.5,-83.5 1348.5,-83.5 1354.5,-89.5 1354.5,-95.5 1354.5,-95.5 1354.5,-117.5 1354.5,-117.5 1354.5,-123.5 1348.5,-129.5 1342.5,-129.5 1342.5,-129.5 864.5,-129.5 864.5,-129.5 858.5,-129.5 852.5,-123.5 852.5,-117.5 852.5,-117.5 852.5,-95.5 852.5,-95.5 852.5,-89.5 858.5,-83.5 864.5,-83.5"/>
+<text text-anchor="middle" x="904.5" y="-102.8" font-family="Times,serif" font-size="14.00">val: Дашков</text>
+<polyline fill="none" stroke="black" points="956.5,-83.5 956.5,-129.5 "/>
+<text text-anchor="middle" x="1049.5" y="-114.3" font-family="Times,serif" font-size="14.00">left: 0x6040000002d0</text>
+<polyline fill="none" stroke="black" points="956.5,-106.5 1142.5,-106.5 "/>
+<text text-anchor="middle" x="1049.5" y="-91.3" font-family="Times,serif" font-size="14.00">right: 0x604000000310</text>
+<polyline fill="none" stroke="black" points="1142.5,-83.5 1142.5,-129.5 "/>
+<text text-anchor="middle" x="1248.5" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000150</text>
 </g>
-<!-- label0x604000000850&#45;&gt;label0x604000000910 -->
+<!-- label0x604000000150&#45;&gt;label0x604000000210 -->
 <g id="edge9" class="edge">
-<title>label0x604000000850&#45;&gt;label0x604000000910</title>
-<path fill="none" stroke="red" stroke-dasharray="5,2" d="M1090.69,-166.37C1093.37,-154.94 1096.63,-141.03 1099.31,-129.61"/>
+<title>label0x604000000150&#45;&gt;label0x604000000210</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M1090.42,-166.37C1092.96,-154.94 1096.05,-141.03 1098.59,-129.61"/>
 </g>
-<!-- label0x604000000950 -->
+<!-- label0x604000000250 -->
 <g id="node8" class="node">
-<title>label0x604000000950</title>
-<path fill="red" stroke="black" d="M83,-0.5C83,-0.5 416,-0.5 416,-0.5 422,-0.5 428,-6.5 428,-12.5 428,-12.5 428,-34.5 428,-34.5 428,-40.5 422,-46.5 416,-46.5 416,-46.5 83,-46.5 83,-46.5 77,-46.5 71,-40.5 71,-34.5 71,-34.5 71,-12.5 71,-12.5 71,-6.5 77,-0.5 83,-0.5"/>
-<text text-anchor="middle" x="99" y="-19.8" font-family="Times,serif" font-size="14.00">val: Р</text>
-<polyline fill="none" stroke="black" points="127,-0.5 127,-46.5 "/>
-<text text-anchor="middle" x="171.5" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
-<polyline fill="none" stroke="black" points="127,-23.5 216,-23.5 "/>
-<text text-anchor="middle" x="171.5" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
-<polyline fill="none" stroke="black" points="216,-0.5 216,-46.5 "/>
-<text text-anchor="middle" x="322" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x6040000008d0</text>
+<title>label0x604000000250</title>
+<path fill="red" stroke="black" d="M81,-0.5C81,-0.5 414,-0.5 414,-0.5 420,-0.5 426,-6.5 426,-12.5 426,-12.5 426,-34.5 426,-34.5 426,-40.5 420,-46.5 414,-46.5 414,-46.5 81,-46.5 81,-46.5 75,-46.5 69,-40.5 69,-34.5 69,-34.5 69,-12.5 69,-12.5 69,-6.5 75,-0.5 81,-0.5"/>
+<text text-anchor="middle" x="97" y="-19.8" font-family="Times,serif" font-size="14.00">val: Р</text>
+<polyline fill="none" stroke="black" points="125,-0.5 125,-46.5 "/>
+<text text-anchor="middle" x="169.5" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
+<polyline fill="none" stroke="black" points="125,-23.5 214,-23.5 "/>
+<text text-anchor="middle" x="169.5" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
+<polyline fill="none" stroke="black" points="214,-0.5 214,-46.5 "/>
+<text text-anchor="middle" x="320" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x6040000001d0</text>
 </g>
-<!-- label0x6040000008d0&#45;&gt;label0x604000000950 -->
+<!-- label0x6040000001d0&#45;&gt;label0x604000000250 -->
 <g id="edge7" class="edge">
-<title>label0x6040000008d0&#45;&gt;label0x604000000950</title>
-<path fill="none" stroke="red" stroke-dasharray="5,2" d="M499.95,-83.47C451.21,-72 391.77,-58 343.03,-46.52"/>
+<title>label0x6040000001d0&#45;&gt;label0x604000000250</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M497.95,-83.47C449.21,-72 389.77,-58 341.03,-46.52"/>
 </g>
-<!-- label0x604000000990 -->
+<!-- label0x604000000290 -->
 <g id="node9" class="node">
-<title>label0x604000000990</title>
-<path fill="red" stroke="black" d="M458.5,-0.5C458.5,-0.5 792.5,-0.5 792.5,-0.5 798.5,-0.5 804.5,-6.5 804.5,-12.5 804.5,-12.5 804.5,-34.5 804.5,-34.5 804.5,-40.5 798.5,-46.5 792.5,-46.5 792.5,-46.5 458.5,-46.5 458.5,-46.5 452.5,-46.5 446.5,-40.5 446.5,-34.5 446.5,-34.5 446.5,-12.5 446.5,-12.5 446.5,-6.5 452.5,-0.5 458.5,-0.5"/>
-<text text-anchor="middle" x="475" y="-19.8" font-family="Times,serif" font-size="14.00">val: А</text>
-<polyline fill="none" stroke="black" points="503.5,-0.5 503.5,-46.5 "/>
-<text text-anchor="middle" x="548" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
-<polyline fill="none" stroke="black" points="503.5,-23.5 592.5,-23.5 "/>
-<text text-anchor="middle" x="548" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
-<polyline fill="none" stroke="black" points="592.5,-0.5 592.5,-46.5 "/>
-<text text-anchor="middle" x="698.5" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x6040000008d0</text>
+<title>label0x604000000290</title>
+<path fill="red" stroke="black" d="M456.5,-0.5C456.5,-0.5 790.5,-0.5 790.5,-0.5 796.5,-0.5 802.5,-6.5 802.5,-12.5 802.5,-12.5 802.5,-34.5 802.5,-34.5 802.5,-40.5 796.5,-46.5 790.5,-46.5 790.5,-46.5 456.5,-46.5 456.5,-46.5 450.5,-46.5 444.5,-40.5 444.5,-34.5 444.5,-34.5 444.5,-12.5 444.5,-12.5 444.5,-6.5 450.5,-0.5 456.5,-0.5"/>
+<text text-anchor="middle" x="473" y="-19.8" font-family="Times,serif" font-size="14.00">val: А</text>
+<polyline fill="none" stroke="black" points="501.5,-0.5 501.5,-46.5 "/>
+<text text-anchor="middle" x="546" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
+<polyline fill="none" stroke="black" points="501.5,-23.5 590.5,-23.5 "/>
+<text text-anchor="middle" x="546" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
+<polyline fill="none" stroke="black" points="590.5,-0.5 590.5,-46.5 "/>
+<text text-anchor="middle" x="696.5" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x6040000001d0</text>
 </g>
-<!-- label0x6040000008d0&#45;&gt;label0x604000000990 -->
+<!-- label0x6040000001d0&#45;&gt;label0x604000000290 -->
 <g id="edge8" class="edge">
-<title>label0x6040000008d0&#45;&gt;label0x604000000990</title>
-<path fill="none" stroke="red" stroke-dasharray="5,2" d="M602.24,-83.37C606.76,-71.94 612.25,-58.03 616.77,-46.61"/>
+<title>label0x6040000001d0&#45;&gt;label0x604000000290</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M600.24,-83.37C604.76,-71.94 610.25,-58.03 614.77,-46.61"/>
 </g>
-<!-- label0x6040000009d0 -->
+<!-- label0x6040000002d0 -->
 <g id="node11" class="node">
-<title>label0x6040000009d0</title>
-<path fill="red" stroke="black" d="M898,-0.5C898,-0.5 1247,-0.5 1247,-0.5 1253,-0.5 1259,-6.5 1259,-12.5 1259,-12.5 1259,-34.5 1259,-34.5 1259,-40.5 1253,-46.5 1247,-46.5 1247,-46.5 898,-46.5 898,-46.5 892,-46.5 886,-40.5 886,-34.5 886,-34.5 886,-12.5 886,-12.5 886,-6.5 892,-0.5 898,-0.5"/>
-<text text-anchor="middle" x="922" y="-19.8" font-family="Times,serif" font-size="14.00">val: Угу</text>
-<polyline fill="none" stroke="black" points="958,-0.5 958,-46.5 "/>
-<text text-anchor="middle" x="1002.5" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
-<polyline fill="none" stroke="black" points="958,-23.5 1047,-23.5 "/>
-<text text-anchor="middle" x="1002.5" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
-<polyline fill="none" stroke="black" points="1047,-0.5 1047,-46.5 "/>
-<text text-anchor="middle" x="1153" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000910</text>
+<title>label0x6040000002d0</title>
+<path fill="red" stroke="black" d="M897,-0.5C897,-0.5 1246,-0.5 1246,-0.5 1252,-0.5 1258,-6.5 1258,-12.5 1258,-12.5 1258,-34.5 1258,-34.5 1258,-40.5 1252,-46.5 1246,-46.5 1246,-46.5 897,-46.5 897,-46.5 891,-46.5 885,-40.5 885,-34.5 885,-34.5 885,-12.5 885,-12.5 885,-6.5 891,-0.5 897,-0.5"/>
+<text text-anchor="middle" x="921" y="-19.8" font-family="Times,serif" font-size="14.00">val: Угу</text>
+<polyline fill="none" stroke="black" points="957,-0.5 957,-46.5 "/>
+<text text-anchor="middle" x="1001.5" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
+<polyline fill="none" stroke="black" points="957,-23.5 1046,-23.5 "/>
+<text text-anchor="middle" x="1001.5" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
+<polyline fill="none" stroke="black" points="1046,-0.5 1046,-46.5 "/>
+<text text-anchor="middle" x="1152" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000210</text>
 </g>
-<!-- label0x604000000910&#45;&gt;label0x6040000009d0 -->
+<!-- label0x604000000210&#45;&gt;label0x6040000002d0 -->
 <g id="edge10" class="edge">
-<title>label0x604000000910&#45;&gt;label0x6040000009d0</title>
-<path fill="none" stroke="red" stroke-dasharray="5,2" d="M1095.76,-83.37C1091.24,-71.94 1085.75,-58.03 1081.23,-46.61"/>
+<title>label0x604000000210&#45;&gt;label0x6040000002d0</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M1094.76,-83.37C1090.24,-71.94 1084.75,-58.03 1080.23,-46.61"/>
 </g>
-<!-- label0x604000000a10 -->
+<!-- label0x604000000310 -->
 <g id="node12" class="node">
-<title>label0x604000000a10</title>
-<path fill="red" stroke="black" d="M1289,-0.5C1289,-0.5 1754,-0.5 1754,-0.5 1760,-0.5 1766,-6.5 1766,-12.5 1766,-12.5 1766,-34.5 1766,-34.5 1766,-40.5 1760,-46.5 1754,-46.5 1754,-46.5 1289,-46.5 1289,-46.5 1283,-46.5 1277,-40.5 1277,-34.5 1277,-34.5 1277,-12.5 1277,-12.5 1277,-6.5 1283,-0.5 1289,-0.5"/>
-<text text-anchor="middle" x="1371" y="-19.8" font-family="Times,serif" font-size="14.00">val: Вы не шокированы</text>
-<polyline fill="none" stroke="black" points="1465,-0.5 1465,-46.5 "/>
-<text text-anchor="middle" x="1509.5" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
-<polyline fill="none" stroke="black" points="1465,-23.5 1554,-23.5 "/>
-<text text-anchor="middle" x="1509.5" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
-<polyline fill="none" stroke="black" points="1554,-0.5 1554,-46.5 "/>
-<text text-anchor="middle" x="1660" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000910</text>
+<title>label0x604000000310</title>
+<path fill="red" stroke="black" d="M1288,-0.5C1288,-0.5 1753,-0.5 1753,-0.5 1759,-0.5 1765,-6.5 1765,-12.5 1765,-12.5 1765,-34.5 1765,-34.5 1765,-40.5 1759,-46.5 1753,-46.5 1753,-46.5 1288,-46.5 1288,-46.5 1282,-46.5 1276,-40.5 1276,-34.5 1276,-34.5 1276,-12.5 1276,-12.5 1276,-6.5 1282,-0.5 1288,-0.5"/>
+<text text-anchor="middle" x="1370" y="-19.8" font-family="Times,serif" font-size="14.00">val: Вы не шокированы</text>
+<polyline fill="none" stroke="black" points="1464,-0.5 1464,-46.5 "/>
+<text text-anchor="middle" x="1508.5" y="-31.3" font-family="Times,serif" font-size="14.00">left: (nil)</text>
+<polyline fill="none" stroke="black" points="1464,-23.5 1553,-23.5 "/>
+<text text-anchor="middle" x="1508.5" y="-8.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
+<polyline fill="none" stroke="black" points="1553,-0.5 1553,-46.5 "/>
+<text text-anchor="middle" x="1659" y="-19.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000210</text>
 </g>
-<!-- label0x604000000910&#45;&gt;label0x604000000a10 -->
+<!-- label0x604000000210&#45;&gt;label0x604000000310 -->
 <g id="edge11" class="edge">
-<title>label0x604000000910&#45;&gt;label0x604000000a10</title>
-<path fill="none" stroke="red" stroke-dasharray="5,2" d="M1217.9,-83.47C1276.98,-72 1349.04,-58 1408.13,-46.52"/>
+<title>label0x604000000210&#45;&gt;label0x604000000310</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M1216.9,-83.47C1275.98,-72 1348.04,-58 1407.13,-46.52"/>
 </g>
-<!-- label0x604000000a50 -->
+<!-- label0x604000000350 -->
 <g id="node14" class="node">
-<title>label0x604000000a50</title>
+<title>label0x604000000350</title>
 <path fill="red" stroke="black" d="M1422,-83.5C1422,-83.5 1777,-83.5 1777,-83.5 1783,-83.5 1789,-89.5 1789,-95.5 1789,-95.5 1789,-117.5 1789,-117.5 1789,-123.5 1783,-129.5 1777,-129.5 1777,-129.5 1422,-129.5 1422,-129.5 1416,-129.5 1410,-123.5 1410,-117.5 1410,-117.5 1410,-95.5 1410,-95.5 1410,-89.5 1416,-83.5 1422,-83.5"/>
 <text text-anchor="middle" x="1449" y="-102.8" font-family="Times,serif" font-size="14.00">val: А.П.</text>
 <polyline fill="none" stroke="black" points="1488,-83.5 1488,-129.5 "/>
@@ -235,16 +235,16 @@
 <polyline fill="none" stroke="black" points="1488,-106.5 1577,-106.5 "/>
 <text text-anchor="middle" x="1532.5" y="-91.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
 <polyline fill="none" stroke="black" points="1577,-83.5 1577,-129.5 "/>
-<text text-anchor="middle" x="1683" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000890</text>
+<text text-anchor="middle" x="1683" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000190</text>
 </g>
-<!-- label0x604000000890&#45;&gt;label0x604000000a50 -->
+<!-- label0x604000000190&#45;&gt;label0x604000000350 -->
 <g id="edge13" class="edge">
-<title>label0x604000000890&#45;&gt;label0x604000000a50</title>
+<title>label0x604000000190&#45;&gt;label0x604000000350</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M1613.31,-166.37C1610.63,-154.94 1607.37,-141.03 1604.69,-129.61"/>
 </g>
-<!-- label0x604000000a90 -->
+<!-- label0x604000000390 -->
 <g id="node15" class="node">
-<title>label0x604000000a90</title>
+<title>label0x604000000390</title>
 <path fill="red" stroke="black" d="M1819,-83.5C1819,-83.5 2176,-83.5 2176,-83.5 2182,-83.5 2188,-89.5 2188,-95.5 2188,-95.5 2188,-117.5 2188,-117.5 2188,-123.5 2182,-129.5 2176,-129.5 2176,-129.5 1819,-129.5 1819,-129.5 1813,-129.5 1807,-123.5 1807,-117.5 1807,-117.5 1807,-95.5 1807,-95.5 1807,-89.5 1813,-83.5 1819,-83.5"/>
 <text text-anchor="middle" x="1847" y="-102.8" font-family="Times,serif" font-size="14.00">val: DED</text>
 <polyline fill="none" stroke="black" points="1887,-83.5 1887,-129.5 "/>
@@ -252,11 +252,11 @@
 <polyline fill="none" stroke="black" points="1887,-106.5 1976,-106.5 "/>
 <text text-anchor="middle" x="1931.5" y="-91.3" font-family="Times,serif" font-size="14.00">right: (nil)</text>
 <polyline fill="none" stroke="black" points="1976,-83.5 1976,-129.5 "/>
-<text text-anchor="middle" x="2082" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000890</text>
+<text text-anchor="middle" x="2082" y="-102.8" font-family="Times,serif" font-size="14.00">previous: 0x604000000190</text>
 </g>
-<!-- label0x604000000890&#45;&gt;label0x604000000a90 -->
+<!-- label0x604000000190&#45;&gt;label0x604000000390 -->
 <g id="edge14" class="edge">
-<title>label0x604000000890&#45;&gt;label0x604000000a90</title>
+<title>label0x604000000190&#45;&gt;label0x604000000390</title>
 <path fill="none" stroke="red" stroke-dasharray="5,2" d="M1721.56,-166.47C1775.27,-155 1840.76,-141 1894.46,-129.52"/>
 </g>
 </g>

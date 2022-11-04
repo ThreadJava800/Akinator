@@ -88,6 +88,8 @@ int parseFile(Akinator_t *akinator, const char *fileName) {
     return err;
 }
 
+// PLAY SECTION
+
 void akiNodeToFile(Node_t *node, FILE *file) {
     if (!node || !file) return;
 
@@ -141,7 +143,7 @@ int addNewNode(Akinator_t *akinator, Node_t *node, const char *fileName) {
 
     int err = AKINATOR_OK;
     err |= akinatorToFile(akinator, fileName);
-    if (err == AKINATOR_OK) akiPrint("Добавил :) Теперь я чуточку умнее.\n");
+    if (err == AKINATOR_OK) akiPrint("Добавил :) Теперь я чуточку умнее.\n\n");
 
     return err;
 }
@@ -198,6 +200,43 @@ int akiPlay(Akinator_t *akinator) {
     return err;
 }
 
+// DEFINITION SECTION
+
+Node_t* akiNodeDef(Node_t *node, const char *object) {
+    if (!node || !object) return nullptr;
+
+    if (strcasecmp(node->value, object) == 0) {
+        printf("true");
+        return node;
+    }
+
+    if (node->left) akiNodeDef(node->left, object);
+    if (node->right) akiNodeDef(node->right, object);
+
+    // TODO: функция возвращает всегда нуллптр, добавить считывания файла в начало работы
+}
+
+int akiGiveDef(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    akiPrint("Ну и кого мне искать?: ");
+    char who[MAX_FILE_NAME] = "";
+    scanf("%s", who);
+
+    Node_t *foundNode = akiNodeDef(akinator->root, (const char*) who);
+    if (!foundNode) {
+        akiPrint("Таких не имеем, у нас все нормальные, культурные ребята.\n\n");
+    } else {
+        akiPrint(foundNode->value);
+    }
+
+    chooseMode(akinator);
+
+    return AKINATOR_OK;
+}
+
+//
+
 void akiPrint(const char *message) {
     printf("%s", message);
 }
@@ -207,7 +246,8 @@ int chooseMode(Akinator_t *akinator) {
 
     akiPrint("Выберите режим:\n\
               0 - выход из программы\n\
-              1 - играть\n");
+              1 - играть\n\
+              2 - дать определение\n");
 
     int err = AKINATOR_OK;
     int failure = 1;
@@ -225,6 +265,9 @@ int chooseMode(Akinator_t *akinator) {
             case PLAY:
                 err |= akiPlay(akinator);
                 break;
+            case DEFINITION:
+                err |= akiGiveDef(akinator);
+                break;
             default:
                 akiPrint("Неизвестная комманда, попробуйте ещё раз.\n");
                 failure = 1;
@@ -232,7 +275,7 @@ int chooseMode(Akinator_t *akinator) {
         }
     }
     
-    return AKINATOR_OK;
+    return err;
 }
 
 int akiNodeDtor(Node_t *node) {

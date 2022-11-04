@@ -19,8 +19,9 @@ enum AkinatorErrors {
 };
 
 enum MODES {
-    EXIT    = 0,
-    PLAY    = 1,
+    EXIT       = 0,
+    PLAY       = 1,
+    DEFINITION = 2,
 };
 
 struct Akinator_t {
@@ -43,6 +44,8 @@ int readNodes(Node_t *node, FILE *akiFile);
 
 int parseFile(Akinator_t *akinator, const char *fileName);
 
+// PLAY SECTION
+
 void akiNodeToFile(Node_t *node, FILE *file);
 
 int akinatorToFile(Akinator_t *akinator, const char *fileName);
@@ -52,6 +55,14 @@ int addNewNode(Akinator_t *akinator, Node_t *node, const char *fileName);
 int akiAsk(Akinator_t *akinator, Node_t *node, const char *fileName);
 
 int akiPlay(Akinator_t *akinator);
+
+// DEFINITION SECTION
+
+Node_t* akiNodeDef(Node_t *node, const char *object);
+
+int akiGiveDef(Akinator_t *akinator);
+
+//
 
 void akiPrint(const char *message);
 
