@@ -1,11 +1,13 @@
 #include "akinator.h"
 
-int akinatorCtor(Akinator_t *akinator) {
+int akinatorCtor(Akinator_t *akinator, short needVoice) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
     int err = AKINATOR_OK;
     akinator->root =  nodeCtor("Это неизвестно кто", nullptr, nullptr, nullptr, printElemT, &err);
     CHECK(!akinator->root, akinator->root, NULL_PTR);
+
+    akinator->needVoice = needVoice;
 
     return err;
 }
@@ -37,7 +39,7 @@ int readNode(Node_t *node, FILE *akiFile) {
         }
 
         nodeText[nodeTextInd - 1] = '\0';
-        //printf("%s\n", nodeText);
+
         node->value = (char*) calloc((size_t) nodeTextInd, sizeof(char));
         strcpy(node->value, nodeText);
     } 
@@ -48,7 +50,6 @@ int readNode(Node_t *node, FILE *akiFile) {
     
     if (symb == '}') {
         node->left = node->right = nullptr;
-        printf("%s\n", node->value);
         symb = getc(akiFile);
     } else {
         node->left  = nodeCtor("Это неизвестно кто", nullptr, nullptr, node, printElemT);
@@ -87,7 +88,105 @@ int parseFile(Akinator_t *akinator, const char *fileName) {
     return err;
 }
 
-int akinatorDtor(Akinator_t *akinator) {
+int akiAsk(Node_t *node) {
+    CHECK(!node, node, NULL_PTR);
+
+    if (!(node->left && node->right)) {
+        akiPrint("Это ");
+    }
+    akiPrint(node->value);
+    akiPrint("? (да/нет)\n");
+
+    int failure = 1;
+    while (failure) {
+        char answer[10] = "";
+        scanf("%s", answer);
+
+        failure = 0;
+        if (strcasecmp(answer, "да") == 0) {
+            if (node->left) akiAsk(node->left);
+            else akiPrint("Ха-ха, я умнее тебя! У меня памяти 16 Мегабайт!\n");
+        } else if (strcasecmp(answer, "нет") == 0) {
+            akiAsk(node->right);
+        } else {
+            akiPrint("Не понял, ещё раз:\n");
+            failure = 1;
+        }
+    }
 
     return AKINATOR_OK;
+}
+
+int akiPlay(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    akiPrint("Введите название файла с деревом: ");
+    char fileName[MAX_FILE_NAME] = "";
+    scanf("%s", fileName);
+    
+    int err = AKINATOR_OK;
+    err |= parseFile(akinator, fileName);
+    if (err != AKINATOR_OK) return err;
+
+    err |= akiAsk(akinator->root);
+    if (err == AKINATOR_OK) chooseMode(akinator);
+
+    return err;
+}
+
+void akiPrint(const char *message) {
+    printf("%s", message);
+}
+
+int chooseMode(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    akiPrint("Выберите режим:\n\
+              0 - выход из программы\n\
+              1 - играть\n");
+
+    int err = AKINATOR_OK;
+    int failure = 1;
+    while (failure) {
+        int mode = -1;
+        printf("Введите номер комманды: ");
+        scanf("%d", &mode);
+        failure = 0;
+
+        switch (mode) {
+            case EXIT:
+                akinatorDtor(akinator);
+                exit(0);
+                break;
+            case PLAY:
+                err |= akiPlay(akinator);
+                break;
+            default:
+                akiPrint("Неизвестная комманда, попробуйте ещё раз.\n");
+                failure = 1;
+                break;
+        }
+    }
+    
+    return AKINATOR_OK;
+}
+
+int akiNodeDtor(Node_t *node) {
+    CHECK(!node, node, NULL_PTR);
+
+    if (node->left)  akiNodeDtor(node->left);
+    if (node->right) akiNodeDtor(node->right);
+
+    if (node->value) free(node->value);
+    free(node);
+
+    return AKINATOR_OK;
+}
+
+int akinatorDtor(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    int err = akiNodeDtor(akinator->root);
+
+    return err;
 }

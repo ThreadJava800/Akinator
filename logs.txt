@@ -1,1 +1,0 @@
-Assertion failed in int main() at main.cpp(9): ((1.5)Животное(((P)ведёт у ФПМИ(ПАЮ))ведёт матан((А.П.)поёт(DED))))
