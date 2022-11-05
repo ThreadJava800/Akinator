@@ -123,10 +123,10 @@ int addNewNode(Akinator_t *akinator, Node_t *node) {
 
     char leftName[MAX_FILE_NAME] = "";
     akiPrint("Ладно, ты победил. Кто это был?\nСкажи пж: ", akinator->needVoice);
-    scanf("%s", leftName);
+    mGetline(leftName, MAX_FILE_NAME, stdin);
 
     Node_t *newRight = nodeCtor(node->value, nullptr, nullptr, node, printElemT);
-    Node_t *newLeft  = nodeCtor(leftName, nullptr, nullptr, node, printElemT);
+    Node_t *newLeft  = nodeCtor(strdup(leftName), nullptr, nullptr, node, printElemT);
 
     akiPrint("Чем ", akinator->needVoice);
     akiPrint(leftName, akinator->needVoice);
@@ -135,9 +135,9 @@ int addNewNode(Akinator_t *akinator, Node_t *node) {
     akiPrint("?\n", akinator->needVoice);
 
     char nodeQuest[MAX_FILE_NAME] = "";
-    scanf("%s", nodeQuest);
+    mGetline(nodeQuest, MAX_FILE_NAME, stdin);
 
-    node->value = nodeQuest;
+    node->value = strdup(nodeQuest);
     node->right = newRight;
     node->left  = newLeft;
 
@@ -160,8 +160,8 @@ int akiAsk(Akinator_t *akinator, Node_t *node) {
     int failure = 1;
     int err = AKINATOR_OK;
     while (failure) {
-        char answer[10] = "";
-        scanf("%s", answer);
+        char answer[MAX_FILE_NAME] = "";
+        mGetline(answer, MAX_FILE_NAME, stdin);
 
         failure = 0;
         if (strcasecmp(answer, "да") == 0) {
@@ -259,7 +259,7 @@ int akiGiveDef(Akinator_t *akinator) {
 
     akiPrint("Ну и кого мне искать?: ", akinator->needVoice);
     char who[MAX_FILE_NAME] = "";
-    scanf("%s", who);
+    mGetline(who, MAX_FILE_NAME, stdin);
 
     Node_t *foundNode = akiNodeDef(akinator->root, (const char*) who);
     int err = AKINATOR_OK;
@@ -366,9 +366,9 @@ int akiCompare(Akinator_t *akinator) {
 
     char object1[MAX_FILE_NAME] = "", object2[MAX_FILE_NAME] = "";
     akiPrint("Введите первый объект: ", akinator->needVoice);
-    scanf("%s", object1);
+    mGetline(object1, MAX_FILE_NAME, stdin);
     akiPrint("Введите второй объект: ", akinator->needVoice);
-    scanf("%s", object2);
+    mGetline(object2, MAX_FILE_NAME, stdin);
 
     Node_t *objNode1 = akiNodeDef(akinator->root, object1);
     Node_t *objNode2 = akiNodeDef(akinator->root, object2);
@@ -392,25 +392,49 @@ int akiCompare(Akinator_t *akinator) {
 
 //
 
+void mGetline(char buf[], int lineLen, FILE *stream) {
+    char* backSlashN = nullptr;
+    do {
+        fgets(buf, lineLen, stream);
+
+        backSlashN = strchr(buf, '\n');
+        if (backSlashN != nullptr)
+            *backSlashN = '\0';
+    }
+    while(backSlashN == nullptr || strlen(buf) == 0);
+}
+
 int akiReadFile(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
-    akiPrint("Введите название файла с деревом: ", akinator->needVoice);
-    char fileName[MAX_FILE_NAME] = "";
-    scanf("%s", fileName);
+    int success = 0;
+    while(!success) {
+        akiPrint("Введите название файла с деревом: ", 0);
+        char fileName[MAX_FILE_NAME] = "";
+        mGetline(fileName, MAX_FILE_NAME, stdin);
 
-    akinator->fileName = fileName;
-    
-    int err = AKINATOR_OK;
-    err |= parseFile(akinator);
+        akinator->fileName = strdup(fileName);
+        
+        int err = parseFile(akinator);
+        if (!(err & FILE_NULL)) {
+            success = 1;
+        } else {
+            akiPrint("Файл не найден, давай по новой, Вася!\n", 0);
+        }
+    }
 
-    return err;
+    return AKINATOR_OK;
 }
 
 int controlSound(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
     akinator->needVoice = !akinator->needVoice;
+    if (akinator->needVoice) {
+        akiPrint("Звук включён\n", 1);
+    } else {
+        akiPrint("Звук отключён\n", 0);
+    }
 
     return AKINATOR_OK;
 }
@@ -438,7 +462,8 @@ int chooseMode(Akinator_t *akinator) {
             2 - дать определение\n\
             3 - сравнение\n\
             4 - графический дамп\n\
-            5 - отключить(включить) звук\n", 0);
+            5 - отключить(включить) звук\n\
+            6 - прочитать новый файл\n", 0);
 
         int mode = -1;
         printf("Введите номер комманды: ");
@@ -464,6 +489,11 @@ int chooseMode(Akinator_t *akinator) {
             case SOUND:
                 err |= controlSound(akinator);
                 break;
+            case NEW_FILE:
+                err |= akinatorDtor(akinator);
+                err |= akinatorCtor(akinator);
+                err |= akiReadFile(akinator);
+                break;
             default:
                 akiPrint("Неизвестная комманда, попробуйте ещё раз.\n", akinator->needVoice);
                 break;
@@ -479,8 +509,10 @@ int akiNodeDtor(Node_t *node) {
     if (node->left)  akiNodeDtor(node->left);
     if (node->right) akiNodeDtor(node->right);
 
-    if (node->value) free(node->value);
-    free(node);
+    free(node->left);
+    node->left = nullptr;
+    free(node->right);
+    node->right = nullptr;
 
     return AKINATOR_OK;
 }
@@ -488,7 +520,8 @@ int akiNodeDtor(Node_t *node) {
 int akinatorDtor(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
-    int err = akiNodeDtor(akinator->root);
+    int err = AKINATOR_OK;
+    err |= akiNodeDtor(akinator->root);
 
     return err;
 }

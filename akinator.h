@@ -26,6 +26,7 @@ enum MODES {
     COMPARE    = 3,
     GRAPHICS   = 4,
     SOUND      = 5,
+    NEW_FILE   = 6,
 };
 
 struct Akinator_t {
@@ -78,6 +79,8 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
 int akiCompare(Akinator_t *akinator);
 
 //
+
+void mGetline(char buf[], int lineLen, FILE *stream);
 
 int akiReadFile(Akinator_t *akinator);
 
