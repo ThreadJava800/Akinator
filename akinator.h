@@ -25,6 +25,7 @@ enum MODES {
     DEFINITION = 2,
     COMPARE    = 3,
     GRAPHICS   = 4,
+    SOUND      = 5,
 };
 
 struct Akinator_t {
@@ -80,7 +81,9 @@ int akiCompare(Akinator_t *akinator);
 
 int akiReadFile(Akinator_t *akinator);
 
-void akiPrint(const char *message);
+int controlSound(Akinator_t *akinator);
+
+void akiPrint(const char *message, short needVoice);
 
 int chooseMode(Akinator_t *akinator);
 

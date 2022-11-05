@@ -122,17 +122,17 @@ int addNewNode(Akinator_t *akinator, Node_t *node) {
     CHECK(!node, node, NULL_PTR);
 
     char leftName[MAX_FILE_NAME] = "";
-    akiPrint("Ладно, ты победил. Кто это был?\nСкажи пж: ");
+    akiPrint("Ладно, ты победил. Кто это был?\nСкажи пж: ", akinator->needVoice);
     scanf("%s", leftName);
 
     Node_t *newRight = nodeCtor(node->value, nullptr, nullptr, node, printElemT);
     Node_t *newLeft  = nodeCtor(leftName, nullptr, nullptr, node, printElemT);
 
-    akiPrint("Чем ");
-    akiPrint(leftName);
-    akiPrint(" отличается от ");
-    akiPrint(newRight->value);
-    akiPrint("?\n");
+    akiPrint("Чем ", akinator->needVoice);
+    akiPrint(leftName, akinator->needVoice);
+    akiPrint(" отличается от ", akinator->needVoice);
+    akiPrint(newRight->value, akinator->needVoice);
+    akiPrint("?\n", akinator->needVoice);
 
     char nodeQuest[MAX_FILE_NAME] = "";
     scanf("%s", nodeQuest);
@@ -143,7 +143,7 @@ int addNewNode(Akinator_t *akinator, Node_t *node) {
 
     int err = AKINATOR_OK;
     err |= akinatorToFile(akinator);
-    if (err == AKINATOR_OK) akiPrint("Добавил :) Теперь я чуточку умнее.\n\n");
+    if (err == AKINATOR_OK) akiPrint("Добавил :) Теперь я чуточку умнее.\n\n", akinator->needVoice);
 
     return err;
 }
@@ -152,10 +152,10 @@ int akiAsk(Akinator_t *akinator, Node_t *node) {
     CHECK(!node, node, NULL_PTR);
 
     if (!(node->left && node->right)) {
-        akiPrint("Это ");
+        akiPrint("Это ", akinator->needVoice);
     }
-    akiPrint(node->value);
-    akiPrint("? (да/нет)\n");
+    akiPrint(node->value, akinator->needVoice);
+    akiPrint("? (да/нет)\n", akinator->needVoice);
 
     int failure = 1;
     int err = AKINATOR_OK;
@@ -167,7 +167,7 @@ int akiAsk(Akinator_t *akinator, Node_t *node) {
         if (strcasecmp(answer, "да") == 0) {
 
             if (node->left) akiAsk(akinator, node->left);
-            else akiPrint("Ха-ха, я умнее тебя! У меня памяти 16 Мегабайт!\n");
+            else akiPrint("Ха-ха, я умнее тебя! У меня памяти 16 Мегабайт!\n", akinator->needVoice);
 
         } else if (strcasecmp(answer, "нет") == 0) {
 
@@ -175,7 +175,7 @@ int akiAsk(Akinator_t *akinator, Node_t *node) {
             else err |= addNewNode(akinator, node);
 
         } else {
-            akiPrint("Не понял, ещё раз:\n");
+            akiPrint("Не понял, ещё раз:\n", akinator->needVoice);
             failure = 1;
         }
     }
@@ -227,21 +227,21 @@ int getObjStack(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
 int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
     CHECK_AKI(!akinator || !node || !stack, AKINATOR_NULL);
 
-    akiPrint(node->value);
+    akiPrint(node->value, akinator->needVoice);
     int err = AKINATOR_OK;
     err |= getObjStack(akinator, node, stack);
 
-    akiPrint(" это");
+    akiPrint(" это", akinator->needVoice);
     size_t counter = stack->size;
     Node_t *current = (Node_t *) stackPop(stack);
     Node_t *next    = (Node_t *) stackPop(stack);
     while (counter > 0) {
         if (current->right == next) {
-            akiPrint(" не ");
-            akiPrint(current->value);
+            akiPrint(" не ", akinator->needVoice);
+            akiPrint(current->value, akinator->needVoice);
         } else {
-            akiPrint(" ");
-            akiPrint(current->value);
+            akiPrint(" ", akinator->needVoice);
+            akiPrint(current->value, akinator->needVoice);
         }
         counter--;
 
@@ -249,7 +249,7 @@ int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
         if (stack->size > 0) next = (Node_t *) stackPop(stack);
     }
 
-    akiPrint("\n\n");
+    akiPrint("\n\n", akinator->needVoice);
 
     return err;
 }
@@ -257,14 +257,14 @@ int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
 int akiGiveDef(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
-    akiPrint("Ну и кого мне искать?: ");
+    akiPrint("Ну и кого мне искать?: ", akinator->needVoice);
     char who[MAX_FILE_NAME] = "";
     scanf("%s", who);
 
     Node_t *foundNode = akiNodeDef(akinator->root, (const char*) who);
     int err = AKINATOR_OK;
     if (!foundNode) {
-        akiPrint("Таких не имеем, у нас все нормальные, культурные ребята.\n\n");
+        akiPrint("Таких не имеем, у нас все нормальные, культурные ребята.\n\n", akinator->needVoice);
     } else {
         Stack_t stack = {};
         _stackCtor(&stack, 1);
@@ -289,10 +289,10 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
     err |= getObjStack(akinator, objNode1, &stack1);
     err |= getObjStack(akinator, objNode2, &stack2);
 
-    akiPrint(object1);
-    akiPrint(" похоже на ");
-    akiPrint(object2);
-    akiPrint(" тем, что они оба");
+    akiPrint(object1, akinator->needVoice);
+    akiPrint(" похоже на ", akinator->needVoice);
+    akiPrint(object2, akinator->needVoice);
+    akiPrint(" тем, что они оба", akinator->needVoice);
 
     size_t simCounter = 0, startSize1 = stack1.size, startSize2 = stack2.size;
     Node_t *cur1 = (Node_t*) stackPop(&stack1);
@@ -302,11 +302,11 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
     while (next1 == next2) {
         if (next1 == next2) {
             if (cur1->right == next1) {
-                akiPrint(" не ");
-                akiPrint(cur1->value);
+                akiPrint(" не ", akinator->needVoice);
+                akiPrint(cur1->value, akinator->needVoice);
             } else {
-                akiPrint(" ");
-                akiPrint(cur1->value);
+                akiPrint(" ", akinator->needVoice);
+                akiPrint(cur1->value, akinator->needVoice);
             }
         }
 
@@ -318,17 +318,17 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         simCounter++;
     }
 
-    akiPrint(", но ");
-    akiPrint(object1);
+    akiPrint(", но ", akinator->needVoice);
+    akiPrint(object1, akinator->needVoice);
 
     size_t counter = startSize1 - simCounter;
     while (counter > 0) {
         if (cur1->right == next1) {
-            akiPrint(" не ");
-            akiPrint(cur1->value);
+            akiPrint(" не ", akinator->needVoice);
+            akiPrint(cur1->value, akinator->needVoice);
         } else {
-            akiPrint(" ");
-            akiPrint(cur1->value);
+            akiPrint(" ", akinator->needVoice);
+            akiPrint(cur1->value, akinator->needVoice);
         }
         counter--;
 
@@ -336,24 +336,24 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         if (stack1.size > 0) next1 = (Node_t*) stackPop(&stack1);
     }
 
-    akiPrint(", а ");
-    akiPrint(object2);
+    akiPrint(", а ", akinator->needVoice);
+    akiPrint(object2, akinator->needVoice);
 
     counter = startSize2 - simCounter;
     while (counter > 0) {
         if (cur2->right == next2) {
-            akiPrint(" не ");
-            akiPrint(cur2->value);
+            akiPrint(" не ", akinator->needVoice);
+            akiPrint(cur2->value, akinator->needVoice);
         } else {
-            akiPrint(" ");
-            akiPrint(cur2->value);
+            akiPrint(" ", akinator->needVoice);
+            akiPrint(cur2->value, akinator->needVoice);
         }
         counter--;
 
         cur2 = next2;
         if (stack2.size > 0) next2 = (Node_t*) stackPop(&stack2);
     }
-    akiPrint("\n\n");
+    akiPrint("\n\n", akinator->needVoice);
 
     stackDtor(&stack1);
     stackDtor(&stack2);
@@ -365,21 +365,21 @@ int akiCompare(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
     char object1[MAX_FILE_NAME] = "", object2[MAX_FILE_NAME] = "";
-    akiPrint("Введите первый объект: ");
+    akiPrint("Введите первый объект: ", akinator->needVoice);
     scanf("%s", object1);
-    akiPrint("Введите второй объект: ");
+    akiPrint("Введите второй объект: ", akinator->needVoice);
     scanf("%s", object2);
 
     Node_t *objNode1 = akiNodeDef(akinator->root, object1);
     Node_t *objNode2 = akiNodeDef(akinator->root, object2);
     if (!objNode1 || !objNode2) {
-        akiPrint("Чувствую скам...\n");
+        akiPrint("Чувствую скам...\n", akinator->needVoice);
 
         return AKINATOR_OK;
     }
 
     if (objNode1 == objNode2) {
-        akiPrint("Это одно и то же, дружище.\n");
+        akiPrint("Это одно и то же, дружище.\n", akinator->needVoice);
 
         return AKINATOR_OK;
     }
@@ -395,7 +395,7 @@ int akiCompare(Akinator_t *akinator) {
 int akiReadFile(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
-    akiPrint("Введите название файла с деревом: ");
+    akiPrint("Введите название файла с деревом: ", akinator->needVoice);
     char fileName[MAX_FILE_NAME] = "";
     scanf("%s", fileName);
 
@@ -407,8 +407,21 @@ int akiReadFile(Akinator_t *akinator) {
     return err;
 }
 
-void akiPrint(const char *message) {
+int controlSound(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    akinator->needVoice = !akinator->needVoice;
+
+    return AKINATOR_OK;
+}
+
+void akiPrint(const char *message, short needVoice) {
     printf("%s", message);
+    if (needVoice) {
+        char command[MAX_FILE_NAME] = "";
+        sprintf(command, "echo \"%s\" | festival --language russian --tts > /dev/null 2> /dev/null", message);
+        system(command);
+    }
 }
 
 int chooseMode(Akinator_t *akinator) {
@@ -424,7 +437,8 @@ int chooseMode(Akinator_t *akinator) {
             1 - играть\n\
             2 - дать определение\n\
             3 - сравнение\n\
-            4 - графический дамп\n");
+            4 - графический дамп\n\
+            5 - отключить(включить) звук\n", 0);
 
         int mode = -1;
         printf("Введите номер комманды: ");
@@ -447,8 +461,11 @@ int chooseMode(Akinator_t *akinator) {
             case GRAPHICS:
                 graphDump(akinator->root);
                 break;
+            case SOUND:
+                err |= controlSound(akinator);
+                break;
             default:
-                akiPrint("Неизвестная комманда, попробуйте ещё раз.\n");
+                akiPrint("Неизвестная комманда, попробуйте ещё раз.\n", akinator->needVoice);
                 break;
         }
     }
