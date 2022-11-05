@@ -4,7 +4,7 @@ int akinatorCtor(Akinator_t *akinator, short needVoice) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
     int err = AKINATOR_OK;
-    akinator->root =  nodeCtor("Это неизвестно кто", nullptr, nullptr, nullptr, printElemT, &err);
+    akinator->root =  nodeCtor(strdup("Это неизвестно кто"), nullptr, nullptr, nullptr, printElemT, &err);
     CHECK(!akinator->root, akinator->root, NULL_PTR);
 
     akinator->needVoice = needVoice;
@@ -53,8 +53,8 @@ int readNode(Node_t *node, FILE *akiFile) {
         node->left = node->right = nullptr;
         symb = getc(akiFile);
     } else {
-        node->left  = nodeCtor("Это неизвестно кто", nullptr, nullptr, node, printElemT);
-        node->right = nodeCtor("Это неизвестно кто", nullptr, nullptr, node, printElemT);
+        node->left  = nodeCtor(strdup("Это неизвестно кто"), nullptr, nullptr, node, printElemT);
+        node->right = nodeCtor(strdup("Это неизвестно кто"), nullptr, nullptr, node, printElemT);
         ungetc(symb, akiFile);
     }
 
@@ -69,7 +69,6 @@ int readNodes(Node_t *node, FILE *akiFile) {
     err |= readNode(node, akiFile);
     if (node->left)  readNodes(node->left,  akiFile);
     if (node->right) readNodes(node->right, akiFile);
-    graphDump(node);
 
     return err;
 }
@@ -189,7 +188,6 @@ int akiPlay(Akinator_t *akinator) {
 
     int err = AKINATOR_OK;
     err |= akiAsk(akinator, akinator->root);
-    if (err == AKINATOR_OK) chooseMode(akinator);
 
     return err;
 }
@@ -234,7 +232,7 @@ int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
     err |= getObjStack(akinator, node, stack);
 
     akiPrint(" это");
-    int counter = stack->size;
+    size_t counter = stack->size;
     Node_t *current = (Node_t *) stackPop(stack);
     Node_t *next    = (Node_t *) stackPop(stack);
     while (counter > 0) {
@@ -275,37 +273,13 @@ int akiGiveDef(Akinator_t *akinator) {
         stackDtor(&stack);
     }
 
-    chooseMode(akinator);
-
     return err;
 }
 
 // COMPARE
 
-int akiCompare(Akinator_t *akinator) {
-    CHECK_AKI(!akinator, AKINATOR_NULL);
-
-    char object1[MAX_FILE_NAME] = "", object2[MAX_FILE_NAME] = "";
-    akiPrint("Введите первый объект: ");
-    scanf("%s", object1);
-    akiPrint("Введите второй объект: ");
-    scanf("%s", object2);
-
-    Node_t *objNode1 = akiNodeDef(akinator->root, object1);
-    Node_t *objNode2 = akiNodeDef(akinator->root, object2);
-    if (!objNode1 || !objNode2) {
-        akiPrint("Чувствую скам...\n");
-        chooseMode(akinator);
-
-        return AKINATOR_OK;
-    }
-
-    if (objNode1 == objNode2) {
-        akiPrint("Это одно и то же, дружище.\n");
-        chooseMode(akinator);
-
-        return AKINATOR_OK;
-    }
+int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_NAME], Node_t *objNode2, char object2[MAX_FILE_NAME]) {
+    CHECK_AKI(!akinator || !objNode1 || !objNode2, AKINATOR_NULL);
 
     Stack_t stack1 = {}, stack2 = {};
     stackCtor(&stack1, 1);
@@ -320,7 +294,7 @@ int akiCompare(Akinator_t *akinator) {
     akiPrint(object2);
     akiPrint(" тем, что они оба");
 
-    int simCounter = 0, startSize1 = stack1.size, startSize2 = stack2.size;
+    size_t simCounter = 0, startSize1 = stack1.size, startSize2 = stack2.size;
     Node_t *cur1 = (Node_t*) stackPop(&stack1);
     Node_t *next1 = (Node_t*) stackPop(&stack1);
     Node_t *cur2 = (Node_t*) stackPop(&stack2);
@@ -347,7 +321,7 @@ int akiCompare(Akinator_t *akinator) {
     akiPrint(", но ");
     akiPrint(object1);
 
-    int counter = startSize1 - simCounter;
+    size_t counter = startSize1 - simCounter;
     while (counter > 0) {
         if (cur1->right == next1) {
             akiPrint(" не ");
@@ -384,9 +358,36 @@ int akiCompare(Akinator_t *akinator) {
     stackDtor(&stack1);
     stackDtor(&stack2);
 
-    chooseMode(akinator);
+    return err;
+}
+
+int akiCompare(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    char object1[MAX_FILE_NAME] = "", object2[MAX_FILE_NAME] = "";
+    akiPrint("Введите первый объект: ");
+    scanf("%s", object1);
+    akiPrint("Введите второй объект: ");
+    scanf("%s", object2);
+
+    Node_t *objNode1 = akiNodeDef(akinator->root, object1);
+    Node_t *objNode2 = akiNodeDef(akinator->root, object2);
+    if (!objNode1 || !objNode2) {
+        akiPrint("Чувствую скам...\n");
+
+        return AKINATOR_OK;
+    }
+
+    if (objNode1 == objNode2) {
+        akiPrint("Это одно и то же, дружище.\n");
+
+        return AKINATOR_OK;
+    }
+
+    int err = AKINATOR_OK;
+    err |= printCompared(akinator, objNode1, object1, objNode2, object2);
      
-    return AKINATOR_OK;
+    return err;
 }
 
 //
@@ -414,26 +415,25 @@ int chooseMode(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
     if (!akinator->fileName) akiReadFile(akinator);
-    graphDump(akinator->root);
-
-    akiPrint("Выберите режим:\n\
-              0 - выход из программы\n\
-              1 - играть\n\
-              2 - дать определение\n\
-              3 - сравнение\n");
 
     int err = AKINATOR_OK;
     int failure = 1;
     while (failure) {
+        akiPrint("Выберите режим:\n\
+            0 - выход из программы\n\
+            1 - играть\n\
+            2 - дать определение\n\
+            3 - сравнение\n\
+            4 - графический дамп\n");
+
         int mode = -1;
         printf("Введите номер комманды: ");
         scanf("%d", &mode);
-        failure = 0;
 
         switch (mode) {
             case EXIT:
-                akinatorDtor(akinator);
-                exit(0);
+                err |= akinatorDtor(akinator);
+                failure = 0;
                 break;
             case PLAY:
                 err |= akiPlay(akinator);
@@ -444,9 +444,11 @@ int chooseMode(Akinator_t *akinator) {
             case COMPARE:
                 err |= akiCompare(akinator);
                 break;
+            case GRAPHICS:
+                graphDump(akinator->root);
+                break;
             default:
                 akiPrint("Неизвестная комманда, попробуйте ещё раз.\n");
-                failure = 1;
                 break;
         }
     }

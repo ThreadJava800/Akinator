@@ -24,6 +24,7 @@ enum MODES {
     PLAY       = 1,
     DEFINITION = 2,
     COMPARE    = 3,
+    GRAPHICS   = 4,
 };
 
 struct Akinator_t {
@@ -70,6 +71,8 @@ int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack);
 int akiGiveDef(Akinator_t *akinator);
 
 // COMPARE SECTION
+
+int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_NAME], Node_t *objNode2, char object2[MAX_FILE_NAME]);
 
 int akiCompare(Akinator_t *akinator);
 
