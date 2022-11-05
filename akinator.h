@@ -23,6 +23,7 @@ enum MODES {
     EXIT       = 0,
     PLAY       = 1,
     DEFINITION = 2,
+    COMPARE    = 3,
 };
 
 struct Akinator_t {
@@ -62,9 +63,15 @@ int akiPlay(Akinator_t *akinator);
 
 Node_t* akiNodeDef(Node_t *node, const char *object);
 
+int getObjStack(Akinator_t *akinator, Node_t *node, Stack_t *stack);
+
 int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack);
 
 int akiGiveDef(Akinator_t *akinator);
+
+// COMPARE SECTION
+
+int akiCompare(Akinator_t *akinator);
 
 //
 

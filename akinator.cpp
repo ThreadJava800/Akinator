@@ -215,14 +215,23 @@ Node_t* akiNodeDef(Node_t *node, const char *object) {
     return nullptr;
 }
 
-int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
+int getObjStack(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
     CHECK_AKI(!akinator || !node || !stack, AKINATOR_NULL);
 
-    akiPrint(node->value);
     while (node != akinator->root) {
         node = node->previous;
         stackPush(stack, node);
     }
+
+    return AKINATOR_OK;
+}
+
+int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
+    CHECK_AKI(!akinator || !node || !stack, AKINATOR_NULL);
+
+    akiPrint(node->value);
+    int err = AKINATOR_OK;
+    err |= getObjStack(akinator, node, stack);
 
     akiPrint(" это");
     int counter = stack->size;
@@ -244,7 +253,7 @@ int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
 
     akiPrint("\n\n");
 
-    return AKINATOR_OK;
+    return err;
 }
 
 int akiGiveDef(Akinator_t *akinator) {
@@ -262,11 +271,122 @@ int akiGiveDef(Akinator_t *akinator) {
         Stack_t stack = {};
         _stackCtor(&stack, 1);
         err |= printObjectDef(akinator, foundNode, &stack);
+
+        stackDtor(&stack);
     }
 
     chooseMode(akinator);
 
     return err;
+}
+
+// COMPARE
+
+int akiCompare(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    char object1[MAX_FILE_NAME] = "", object2[MAX_FILE_NAME] = "";
+    akiPrint("Введите первый объект: ");
+    scanf("%s", object1);
+    akiPrint("Введите второй объект: ");
+    scanf("%s", object2);
+
+    Node_t *objNode1 = akiNodeDef(akinator->root, object1);
+    Node_t *objNode2 = akiNodeDef(akinator->root, object2);
+    if (!objNode1 || !objNode2) {
+        akiPrint("Чувствую скам...\n");
+        chooseMode(akinator);
+
+        return AKINATOR_OK;
+    }
+
+    if (objNode1 == objNode2) {
+        akiPrint("Это одно и то же, дружище.\n");
+        chooseMode(akinator);
+
+        return AKINATOR_OK;
+    }
+
+    Stack_t stack1 = {}, stack2 = {};
+    stackCtor(&stack1, 1);
+    stackCtor(&stack2, 1);
+
+    int err = AKINATOR_OK;
+    err |= getObjStack(akinator, objNode1, &stack1);
+    err |= getObjStack(akinator, objNode2, &stack2);
+
+    akiPrint(object1);
+    akiPrint(" похоже на ");
+    akiPrint(object2);
+    akiPrint(" тем, что они оба");
+
+    int simCounter = 0, startSize1 = stack1.size, startSize2 = stack2.size;
+    Node_t *cur1 = (Node_t*) stackPop(&stack1);
+    Node_t *next1 = (Node_t*) stackPop(&stack1);
+    Node_t *cur2 = (Node_t*) stackPop(&stack2);
+    Node_t *next2 = (Node_t*) stackPop(&stack2);
+    while (next1 == next2) {
+        if (next1 == next2) {
+            if (cur1->right == next1) {
+                akiPrint(" не ");
+                akiPrint(cur1->value);
+            } else {
+                akiPrint(" ");
+                akiPrint(cur1->value);
+            }
+        }
+
+        cur1 = next1;
+        next1 = (Node_t*) stackPop(&stack1);
+        cur2 = next2;
+        next2 = (Node_t*) stackPop(&stack2);
+
+        simCounter++;
+    }
+
+    akiPrint(", но ");
+    akiPrint(object1);
+
+    int counter = startSize1 - simCounter;
+    while (counter > 0) {
+        if (cur1->right == next1) {
+            akiPrint(" не ");
+            akiPrint(cur1->value);
+        } else {
+            akiPrint(" ");
+            akiPrint(cur1->value);
+        }
+        counter--;
+
+        cur1 = next1;
+        if (stack1.size > 0) next1 = (Node_t*) stackPop(&stack1);
+    }
+
+    akiPrint(", а ");
+    akiPrint(object2);
+
+    counter = startSize2 - simCounter;
+    while (counter > 0) {
+        if (cur2->right == next2) {
+            akiPrint(" не ");
+            akiPrint(cur2->value);
+        } else {
+            akiPrint(" ");
+            akiPrint(cur2->value);
+        }
+        counter--;
+
+        cur2 = next2;
+        if (stack2.size > 0) next2 = (Node_t*) stackPop(&stack2);
+    }
+    akiPrint("\n\n");
+
+    stackDtor(&stack1);
+    stackDtor(&stack2);
+
+    chooseMode(akinator);
+     
+    return AKINATOR_OK;
 }
 
 //
@@ -299,7 +419,8 @@ int chooseMode(Akinator_t *akinator) {
     akiPrint("Выберите режим:\n\
               0 - выход из программы\n\
               1 - играть\n\
-              2 - дать определение\n");
+              2 - дать определение\n\
+              3 - сравнение\n");
 
     int err = AKINATOR_OK;
     int failure = 1;
@@ -319,6 +440,9 @@ int chooseMode(Akinator_t *akinator) {
                 break;
             case DEFINITION:
                 err |= akiGiveDef(akinator);
+                break;
+            case COMPARE:
+                err |= akiCompare(akinator);
                 break;
             default:
                 akiPrint("Неизвестная комманда, попробуйте ещё раз.\n");
