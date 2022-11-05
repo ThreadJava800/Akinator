@@ -199,15 +199,52 @@ int akiPlay(Akinator_t *akinator) {
 Node_t* akiNodeDef(Node_t *node, const char *object) {
     if (!node || !object) return nullptr;
 
-    if (node->left) akiNodeDef(node->left, object);
-    if (node->right) akiNodeDef(node->right, object);
-
     if (strcasecmp(node->value, object) == 0) {
-        printf("true");
         return node;
     }
 
-    // TODO: функция возвращает всегда нуллптр, добавить считывания файла в начало работы
+    if (node->left)  {
+        Node_t *foundNode = akiNodeDef(node->left, object);
+        if (foundNode) return foundNode;
+    }
+    if (node->right) {
+        Node_t *foundNode = akiNodeDef(node->right, object);
+        if (foundNode) return foundNode;
+    }
+
+    return nullptr;
+}
+
+int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
+    CHECK_AKI(!akinator || !node || !stack, AKINATOR_NULL);
+
+    akiPrint(node->value);
+    while (node != akinator->root) {
+        node = node->previous;
+        stackPush(stack, node);
+    }
+
+    akiPrint(" это");
+    int counter = stack->size;
+    Node_t *current = (Node_t *) stackPop(stack);
+    Node_t *next    = (Node_t *) stackPop(stack);
+    while (counter > 0) {
+        if (current->right == next) {
+            akiPrint(" не ");
+            akiPrint(current->value);
+        } else {
+            akiPrint(" ");
+            akiPrint(current->value);
+        }
+        counter--;
+
+        current = next;
+        if (stack->size > 0) next = (Node_t *) stackPop(stack);
+    }
+
+    akiPrint("\n\n");
+
+    return AKINATOR_OK;
 }
 
 int akiGiveDef(Akinator_t *akinator) {
@@ -218,15 +255,18 @@ int akiGiveDef(Akinator_t *akinator) {
     scanf("%s", who);
 
     Node_t *foundNode = akiNodeDef(akinator->root, (const char*) who);
+    int err = AKINATOR_OK;
     if (!foundNode) {
         akiPrint("Таких не имеем, у нас все нормальные, культурные ребята.\n\n");
     } else {
-        akiPrint(foundNode->value);
+        Stack_t stack = {};
+        _stackCtor(&stack, 1);
+        err |= printObjectDef(akinator, foundNode, &stack);
     }
 
     chooseMode(akinator);
 
-    return AKINATOR_OK;
+    return err;
 }
 
 //
@@ -254,6 +294,7 @@ int chooseMode(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
     if (!akinator->fileName) akiReadFile(akinator);
+    graphDump(akinator->root);
 
     akiPrint("Выберите режим:\n\
               0 - выход из программы\n\

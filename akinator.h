@@ -4,6 +4,7 @@
 
 #include "mlibs/BinaryTree/tree.h"
 #include "mlibs/Onegin/onegin.h"
+#include "mlibs/Secured-Stack/stack.h"
 
 #ifndef _DEBUG
 #define _DEBUG 0
@@ -60,6 +61,8 @@ int akiPlay(Akinator_t *akinator);
 // DEFINITION SECTION
 
 Node_t* akiNodeDef(Node_t *node, const char *object);
+
+int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack);
 
 int akiGiveDef(Akinator_t *akinator);
 
