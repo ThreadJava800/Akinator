@@ -27,7 +27,8 @@ enum MODES {
 struct Akinator_t {
     Node_t *root = nullptr;
 
-    short   needVoice = 1;
+    const char *fileName  = nullptr;
+    short       needVoice = 1;
 };
 
 #define CHECK_AKI(expression, errCode) {   \
@@ -42,17 +43,17 @@ int readNode(Node_t *node, FILE *akiFile);
 
 int readNodes(Node_t *node, FILE *akiFile);
 
-int parseFile(Akinator_t *akinator, const char *fileName);
+int parseFile(Akinator_t *akinator);
 
 // PLAY SECTION
 
 void akiNodeToFile(Node_t *node, FILE *file);
 
-int akinatorToFile(Akinator_t *akinator, const char *fileName);
+int akinatorToFile(Akinator_t *akinator);
 
-int addNewNode(Akinator_t *akinator, Node_t *node, const char *fileName);
+int addNewNode(Akinator_t *akinator, Node_t *node);
 
-int akiAsk(Akinator_t *akinator, Node_t *node, const char *fileName);
+int akiAsk(Akinator_t *akinator, Node_t *node);
 
 int akiPlay(Akinator_t *akinator);
 
@@ -63,6 +64,8 @@ Node_t* akiNodeDef(Node_t *node, const char *object);
 int akiGiveDef(Akinator_t *akinator);
 
 //
+
+int akiReadFile(Akinator_t *akinator);
 
 void akiPrint(const char *message);
 

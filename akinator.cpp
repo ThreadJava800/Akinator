@@ -8,6 +8,7 @@ int akinatorCtor(Akinator_t *akinator, short needVoice) {
     CHECK(!akinator->root, akinator->root, NULL_PTR);
 
     akinator->needVoice = needVoice;
+    akinator->fileName  = nullptr;
 
     return err;
 }
@@ -73,11 +74,11 @@ int readNodes(Node_t *node, FILE *akiFile) {
     return err;
 }
 
-int parseFile(Akinator_t *akinator, const char *fileName) {
+int parseFile(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
-    CHECK_AKI(!fileName, FILE_NULL);
+    CHECK_AKI(!akinator->fileName, FILE_NULL);
 
-    FILE *akiFile  = fopen(fileName, "rb+");
+    FILE *akiFile  = fopen(akinator->fileName, "rb+");
     CHECK_AKI(!akiFile, FILE_NULL);
     
     int err = AKINATOR_OK;
@@ -106,10 +107,10 @@ void akiNodeToFile(Node_t *node, FILE *file) {
     if (!node->right && addedBracket) fprintf(file, " }\n");
 }
 
-int akinatorToFile(Akinator_t *akinator, const char *fileName) {
-    CHECK_AKI(!akinator || !fileName, AKINATOR_NULL);
+int akinatorToFile(Akinator_t *akinator) {
+    CHECK_AKI(!akinator || !akinator->fileName, AKINATOR_NULL);
 
-    FILE *writeFile = fopen(fileName, "w");
+    FILE *writeFile = fopen(akinator->fileName, "w");
     CHECK_AKI(!writeFile, FILE_NULL);
 
     akiNodeToFile(akinator->root, writeFile);
@@ -118,7 +119,7 @@ int akinatorToFile(Akinator_t *akinator, const char *fileName) {
     return AKINATOR_OK;
 }
 
-int addNewNode(Akinator_t *akinator, Node_t *node, const char *fileName) {
+int addNewNode(Akinator_t *akinator, Node_t *node) {
     CHECK(!node, node, NULL_PTR);
 
     char leftName[MAX_FILE_NAME] = "";
@@ -142,13 +143,13 @@ int addNewNode(Akinator_t *akinator, Node_t *node, const char *fileName) {
     node->left  = newLeft;
 
     int err = AKINATOR_OK;
-    err |= akinatorToFile(akinator, fileName);
+    err |= akinatorToFile(akinator);
     if (err == AKINATOR_OK) akiPrint("Добавил :) Теперь я чуточку умнее.\n\n");
 
     return err;
 }
 
-int akiAsk(Akinator_t *akinator, Node_t *node, const char *fileName) {
+int akiAsk(Akinator_t *akinator, Node_t *node) {
     CHECK(!node, node, NULL_PTR);
 
     if (!(node->left && node->right)) {
@@ -166,13 +167,13 @@ int akiAsk(Akinator_t *akinator, Node_t *node, const char *fileName) {
         failure = 0;
         if (strcasecmp(answer, "да") == 0) {
 
-            if (node->left) akiAsk(akinator, node->left, fileName);
+            if (node->left) akiAsk(akinator, node->left);
             else akiPrint("Ха-ха, я умнее тебя! У меня памяти 16 Мегабайт!\n");
 
         } else if (strcasecmp(answer, "нет") == 0) {
 
-            if (node->right) akiAsk(akinator, node->right, fileName);
-            else err |= addNewNode(akinator, node, fileName);
+            if (node->right) akiAsk(akinator, node->right);
+            else err |= addNewNode(akinator, node);
 
         } else {
             akiPrint("Не понял, ещё раз:\n");
@@ -186,15 +187,8 @@ int akiAsk(Akinator_t *akinator, Node_t *node, const char *fileName) {
 int akiPlay(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
 
-    akiPrint("Введите название файла с деревом: ");
-    char fileName[MAX_FILE_NAME] = "";
-    scanf("%s", fileName);
-    
     int err = AKINATOR_OK;
-    err |= parseFile(akinator, fileName);
-    if (err != AKINATOR_OK) return err;
-
-    err |= akiAsk(akinator, akinator->root, fileName);
+    err |= akiAsk(akinator, akinator->root);
     if (err == AKINATOR_OK) chooseMode(akinator);
 
     return err;
@@ -205,13 +199,13 @@ int akiPlay(Akinator_t *akinator) {
 Node_t* akiNodeDef(Node_t *node, const char *object) {
     if (!node || !object) return nullptr;
 
+    if (node->left) akiNodeDef(node->left, object);
+    if (node->right) akiNodeDef(node->right, object);
+
     if (strcasecmp(node->value, object) == 0) {
         printf("true");
         return node;
     }
-
-    if (node->left) akiNodeDef(node->left, object);
-    if (node->right) akiNodeDef(node->right, object);
 
     // TODO: функция возвращает всегда нуллптр, добавить считывания файла в начало работы
 }
@@ -237,12 +231,29 @@ int akiGiveDef(Akinator_t *akinator) {
 
 //
 
+int akiReadFile(Akinator_t *akinator) {
+    CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    akiPrint("Введите название файла с деревом: ");
+    char fileName[MAX_FILE_NAME] = "";
+    scanf("%s", fileName);
+
+    akinator->fileName = fileName;
+    
+    int err = AKINATOR_OK;
+    err |= parseFile(akinator);
+
+    return err;
+}
+
 void akiPrint(const char *message) {
     printf("%s", message);
 }
 
 int chooseMode(Akinator_t *akinator) {
     CHECK_AKI(!akinator, AKINATOR_NULL);
+
+    if (!akinator->fileName) akiReadFile(akinator);
 
     akiPrint("Выберите режим:\n\
               0 - выход из программы\n\
