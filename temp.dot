@@ -1,8 +1,0 @@
-digraph tree {
-	rankdir=HR;
-	label0x5562b78054b0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Мальчик | {left: 0x5562b7806f60 | right: 0x5562b7806fc0} | previous: (nil) }}"];
-	label0x5562b7806f60[shape=record, style="rounded, filled", fillcolor=red, label="{ {val:  | {left: 0x5562b7805f30 | right: 0x5562b7805f00} | previous: 0x5562b78054b0 }}"];
-	label0x5562b78054b0->label0x5562b7806f60 [color="red", style="dashed",arrowhead="none"]	label0x5562b7805f30[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Сафонов | {left: (nil) | right: (nil)} | previous: 0x5562b7806f60 }}"];
-	label0x5562b7806f60->label0x5562b7805f30 [color="red", style="dashed",arrowhead="none"]	label0x5562b7805f00[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Платцер | {left: (nil) | right: (nil)} | previous: 0x5562b7806f60 }}"];
-	label0x5562b7806f60->label0x5562b7805f00 [color="red", style="dashed",arrowhead="none"]	label0x5562b7806fc0[shape=record, style="rounded, filled", fillcolor=red, label="{ {val: Филамофитская | {left: (nil) | right: (nil)} | previous: 0x5562b78054b0 }}"];
-	label0x5562b78054b0->label0x5562b7806fc0 [color="red", style="dashed",arrowhead="none"]}
