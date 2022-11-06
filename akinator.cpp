@@ -299,14 +299,16 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
     Node_t *next1 = (Node_t*) stackPop(&stack1);
     Node_t *cur2 = (Node_t*) stackPop(&stack2);
     Node_t *next2 = (Node_t*) stackPop(&stack2);
-    while (next1 == next2) {
+    while (next1 == next2 && next1 && next2) {
         if (next1 == next2) {
-            if (cur1->right == next1) {
-                akiPrint(" не ", akinator->needVoice);
-                akiPrint(cur1->value, akinator->needVoice);
-            } else {
-                akiPrint(" ", akinator->needVoice);
-                akiPrint(cur1->value, akinator->needVoice);
+            if (cur1) {
+                if (cur1->right == next1) {
+                    akiPrint(" не ", akinator->needVoice);
+                    akiPrint(cur1->value, akinator->needVoice);
+                } else {
+                    akiPrint(" ", akinator->needVoice);
+                    akiPrint(cur1->value, akinator->needVoice);
+                }
             }
         }
 
@@ -323,6 +325,8 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
 
     size_t counter = startSize1 - simCounter;
     while (counter > 0) {
+        if (!next1) next1 = objNode1;
+
         if (cur1->right == next1) {
             akiPrint(" не ", akinator->needVoice);
             akiPrint(cur1->value, akinator->needVoice);
@@ -334,6 +338,7 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
 
         cur1 = next1;
         if (stack1.size > 0) next1 = (Node_t*) stackPop(&stack1);
+        else next1 = objNode1;
     }
 
     akiPrint(", а ", akinator->needVoice);
@@ -341,6 +346,8 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
 
     counter = startSize2 - simCounter;
     while (counter > 0) {
+        if (!next2) next2 = objNode2;
+
         if (cur2->right == next2) {
             akiPrint(" не ", akinator->needVoice);
             akiPrint(cur2->value, akinator->needVoice);
@@ -352,6 +359,7 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
 
         cur2 = next2;
         if (stack2.size > 0) next2 = (Node_t*) stackPop(&stack2);
+        else next2 = objNode2;
     }
     akiPrint("\n\n", akinator->needVoice);
 
