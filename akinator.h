@@ -11,6 +11,7 @@
 #endif
 
 const int MAX_FILE_NAME = 4096;
+const int MAX_PRINT_STRING = 16384;
 
 enum AkinatorErrors {
     AKINATOR_OK   = 1 << 0,

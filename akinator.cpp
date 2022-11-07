@@ -151,11 +151,14 @@ int addNewNode(Akinator_t *akinator, Node_t *node) {
 int akiAsk(Akinator_t *akinator, Node_t *node) {
     CHECK(!node, node, NULL_PTR);
 
+    char toSay[MAX_PRINT_STRING] = "";
     if (!(node->left && node->right)) {
-        akiPrint("Это ", akinator->needVoice);
+        strcat(toSay, "Это ");
     }
-    akiPrint(node->value, akinator->needVoice);
-    akiPrint("? (да/нет)\n", akinator->needVoice);
+    strcat(toSay, node->value);
+    strcat(toSay, "?");
+    akiPrint(toSay, akinator->needVoice);
+    akiPrint(" (да/нет)\n", 0);
 
     int failure = 1;
     int err = AKINATOR_OK;
@@ -227,29 +230,33 @@ int getObjStack(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
 int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
     CHECK_AKI(!akinator || !node || !stack, AKINATOR_NULL);
 
-    akiPrint(node->value, akinator->needVoice);
+    char toSay[MAX_PRINT_STRING] = "";
+
+    strcat(toSay, node->value);
     int err = AKINATOR_OK;
     err |= getObjStack(akinator, node, stack);
 
-    akiPrint(" это", akinator->needVoice);
+    strcat(toSay, " это ");
     size_t counter = stack->size;
     Node_t *current = (Node_t *) stackPop(stack);
     Node_t *next    = (Node_t *) stackPop(stack);
     while (counter > 0) {
         if (current->right == next) {
-            akiPrint(" не ", akinator->needVoice);
-            akiPrint(current->value, akinator->needVoice);
+            strcat(toSay, " не ");
+            strcat(toSay, current->value);
         } else {
-            akiPrint(" ", akinator->needVoice);
-            akiPrint(current->value, akinator->needVoice);
+            strcat(toSay, " ");
+            strcat(toSay, current->value);
         }
+        strcat(toSay, ", ");
         counter--;
 
         current = next;
         if (stack->size > 0) next = (Node_t *) stackPop(stack);
+        else next = node;
     }
-
-    akiPrint("\n\n", akinator->needVoice);
+    strcat(toSay, "\n\n");
+    akiPrint(toSay, akinator->needVoice);
 
     return err;
 }
@@ -288,11 +295,12 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
     int err = AKINATOR_OK;
     err |= getObjStack(akinator, objNode1, &stack1);
     err |= getObjStack(akinator, objNode2, &stack2);
+    char toSay[MAX_PRINT_STRING] = "";
 
-    akiPrint(object1, akinator->needVoice);
-    akiPrint(" похоже на ", akinator->needVoice);
-    akiPrint(object2, akinator->needVoice);
-    akiPrint(" тем, что они оба", akinator->needVoice);
+    strcat(toSay, object1);
+    strcat(toSay, " похоже на ");
+    strcat(toSay, object2);
+    strcat(toSay, " тем, что они оба");
 
     size_t simCounter = 0, startSize1 = stack1.size, startSize2 = stack2.size;
     Node_t *cur1 = (Node_t*) stackPop(&stack1);
@@ -303,12 +311,13 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         if (next1 == next2) {
             if (cur1) {
                 if (cur1->right == next1) {
-                    akiPrint(" не ", akinator->needVoice);
-                    akiPrint(cur1->value, akinator->needVoice);
+                    strcat(toSay, " не ");
+                    strcat(toSay, cur1->value);
                 } else {
-                    akiPrint(" ", akinator->needVoice);
-                    akiPrint(cur1->value, akinator->needVoice);
+                    strcat(toSay, " ");
+                    strcat(toSay, cur1->value);
                 }
+                strcat(toSay, ", ");
             }
         }
 
@@ -320,20 +329,21 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         simCounter++;
     }
 
-    akiPrint(", но ", akinator->needVoice);
-    akiPrint(object1, akinator->needVoice);
+    strcat(toSay, " но ");
+    strcat(toSay, object1);
 
     size_t counter = startSize1 - simCounter;
     while (counter > 0) {
         if (!next1) next1 = objNode1;
 
         if (cur1->right == next1) {
-            akiPrint(" не ", akinator->needVoice);
-            akiPrint(cur1->value, akinator->needVoice);
+            strcat(toSay, " не ");
+            strcat(toSay, cur1->value);
         } else {
-            akiPrint(" ", akinator->needVoice);
-            akiPrint(cur1->value, akinator->needVoice);
+            strcat(toSay, " ");
+            strcat(toSay, cur1->value);
         }
+        strcat(toSay, ", ");
         counter--;
 
         cur1 = next1;
@@ -341,27 +351,30 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         else next1 = objNode1;
     }
 
-    akiPrint(", а ", akinator->needVoice);
-    akiPrint(object2, akinator->needVoice);
+    strcat(toSay, " а ");
+    strcat(toSay, object2);
 
     counter = startSize2 - simCounter;
     while (counter > 0) {
         if (!next2) next2 = objNode2;
 
         if (cur2->right == next2) {
-            akiPrint(" не ", akinator->needVoice);
-            akiPrint(cur2->value, akinator->needVoice);
+            strcat(toSay, " не ");
+            strcat(toSay, cur2->value);
         } else {
-            akiPrint(" ", akinator->needVoice);
-            akiPrint(cur2->value, akinator->needVoice);
+            strcat(toSay, " ");
+            strcat(toSay, cur2->value);
         }
+        strcat(toSay, ", ");
         counter--;
 
         cur2 = next2;
         if (stack2.size > 0) next2 = (Node_t*) stackPop(&stack2);
         else next2 = objNode2;
     }
-    akiPrint("\n\n", akinator->needVoice);
+
+    strcat(toSay, "\n\n");
+    akiPrint(toSay, akinator->needVoice);
 
     stackDtor(&stack1);
     stackDtor(&stack2);
