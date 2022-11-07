@@ -231,31 +231,28 @@ int printObjectDef(Akinator_t *akinator, Node_t *node, Stack_t *stack) {
     CHECK_AKI(!akinator || !node || !stack, AKINATOR_NULL);
 
     char toSay[MAX_PRINT_STRING] = "";
+    int toSayIndex = 0;
 
-    strcat(toSay, node->value);
+    toSayIndex += sprintf(&toSay[toSayIndex], "%s это ", node->value);
     int err = AKINATOR_OK;
     err |= getObjStack(akinator, node, stack);
 
-    strcat(toSay, " это ");
     size_t counter = stack->size;
     Node_t *current = (Node_t *) stackPop(stack);
     Node_t *next    = (Node_t *) stackPop(stack);
     while (counter > 0) {
         if (current->right == next) {
-            strcat(toSay, " не ");
-            strcat(toSay, current->value);
+            toSayIndex += sprintf(&toSay[toSayIndex], "не %s, ", current->value);
         } else {
-            strcat(toSay, " ");
-            strcat(toSay, current->value);
+            toSayIndex += sprintf(&toSay[toSayIndex], " %s, ", current->value);
         }
-        strcat(toSay, ", ");
         counter--;
 
         current = next;
         if (stack->size > 0) next = (Node_t *) stackPop(stack);
         else next = node;
     }
-    strcat(toSay, "\n\n");
+    strcat(&toSay[toSayIndex++], "\n");
     akiPrint(toSay, akinator->needVoice);
 
     return err;
@@ -296,11 +293,9 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
     err |= getObjStack(akinator, objNode1, &stack1);
     err |= getObjStack(akinator, objNode2, &stack2);
     char toSay[MAX_PRINT_STRING] = "";
+    int toSayIndex = 0;
 
-    strcat(toSay, object1);
-    strcat(toSay, " похоже на ");
-    strcat(toSay, object2);
-    strcat(toSay, " тем, что они оба");
+    toSayIndex += sprintf(&toSay[toSayIndex], "%s похоже на %s тем, что они оба ", object1, object2);
 
     size_t simCounter = 0, startSize1 = stack1.size, startSize2 = stack2.size;
     Node_t *cur1 = (Node_t*) stackPop(&stack1);
@@ -311,13 +306,10 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         if (next1 == next2) {
             if (cur1) {
                 if (cur1->right == next1) {
-                    strcat(toSay, " не ");
-                    strcat(toSay, cur1->value);
+                    toSayIndex += sprintf(&toSay[toSayIndex], "не %s, ", cur1->value);
                 } else {
-                    strcat(toSay, " ");
-                    strcat(toSay, cur1->value);
+                    toSayIndex += sprintf(&toSay[toSayIndex], "%s, ", cur1->value);
                 }
-                strcat(toSay, ", ");
             }
         }
 
@@ -329,21 +321,17 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         simCounter++;
     }
 
-    strcat(toSay, " но ");
-    strcat(toSay, object1);
+    toSayIndex += sprintf(&toSay[toSayIndex], "но %s ", object1);
 
     size_t counter = startSize1 - simCounter;
     while (counter > 0) {
         if (!next1) next1 = objNode1;
 
         if (cur1->right == next1) {
-            strcat(toSay, " не ");
-            strcat(toSay, cur1->value);
+            toSayIndex += sprintf(&toSay[toSayIndex], "не %s, ", cur1->value);
         } else {
-            strcat(toSay, " ");
-            strcat(toSay, cur1->value);
+            toSayIndex += sprintf(&toSay[toSayIndex], "%s, ", cur1->value);
         }
-        strcat(toSay, ", ");
         counter--;
 
         cur1 = next1;
@@ -351,21 +339,17 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         else next1 = objNode1;
     }
 
-    strcat(toSay, " а ");
-    strcat(toSay, object2);
+    toSayIndex += sprintf(&toSay[toSayIndex], "а %s", object2);
 
     counter = startSize2 - simCounter;
     while (counter > 0) {
         if (!next2) next2 = objNode2;
 
         if (cur2->right == next2) {
-            strcat(toSay, " не ");
-            strcat(toSay, cur2->value);
+            toSayIndex += sprintf(&toSay[toSayIndex], " не %s, ", cur2->value);
         } else {
-            strcat(toSay, " ");
-            strcat(toSay, cur2->value);
+            toSayIndex += sprintf(&toSay[toSayIndex], " %s, ", cur2->value);
         }
-        strcat(toSay, ", ");
         counter--;
 
         cur2 = next2;
@@ -373,7 +357,7 @@ int printCompared(Akinator_t *akinator, Node_t *objNode1, char object1[MAX_FILE_
         else next2 = objNode2;
     }
 
-    strcat(toSay, "\n\n");
+    strcat(&toSay[toSayIndex++], "\n\n");
     akiPrint(toSay, akinator->needVoice);
 
     stackDtor(&stack1);
@@ -512,10 +496,13 @@ int chooseMode(Akinator_t *akinator) {
                 err |= controlSound(akinator);
                 break;
             case NEW_FILE:
+            {
+                short needVoice = akinator->needVoice;
                 err |= akinatorDtor(akinator);
-                err |= akinatorCtor(akinator);
+                err |= akinatorCtor(akinator, needVoice);
                 err |= akiReadFile(akinator);
                 break;
+            }
             default:
                 akiPrint("Неизвестная комманда, попробуйте ещё раз.\n", akinator->needVoice);
                 break;
