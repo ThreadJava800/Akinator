@@ -492,6 +492,7 @@ int chooseMode(Akinator_t *akinator) {
 
         switch (mode) {
             case EXIT:
+                akiPrint("Ну и ну, вы разочаровываете партию!\n", akinator->needVoice);
                 err |= akinatorDtor(akinator);
                 failure = 0;
                 break;
